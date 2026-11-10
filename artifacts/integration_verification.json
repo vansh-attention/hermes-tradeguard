@@ -1,0 +1,145 @@
+{
+  "run_at": "2026-11-10T09:09:32.209656+00:00",
+  "as_of": "2026-11-10",
+  "mode": "explicit_public_network",
+  "research_only": true,
+  "symbols": {
+    "MSFT": {
+      "bars": 1254,
+      "last_bar": "2026-11-09",
+      "retrieved_at": "2026-11-10T09:09:33.045075+00:00",
+      "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+      "native_cli_equivalence": true,
+      "recommendation": {
+        "action": "WATCHLIST",
+        "score": 69,
+        "evidence_coverage": 0.82,
+        "score_kind": "heuristic_uncalibrated_not_probability",
+        "weights": {
+          "trend_following": 0.4,
+          "value_quality": 0.6
+        },
+        "weight_denominator": 1.0,
+        "strong_recommendation_eligible": false,
+        "validation_status": "heuristic_only_not_performance_validated",
+        "evidence_limitations": [
+          "Incomplete fundamental metric evidence: earnings_yield, fcf_yield, interest_coverage"
+        ],
+        "diagnostic_score": 79.0,
+        "blockers": []
+      },
+      "out_of_sample": {
+        "samples": 799,
+        "strategy": {
+          "start_date": "2023-09-01",
+          "end_date": "2026-11-09",
+          "ending_wealth": 0.8548524794874901,
+          "gross_ending_wealth": 0.9077272249712597,
+          "total_return": -0.1451475205125099,
+          "gross_total_return": -0.09227277502874032,
+          "sharpe": -0.1979787710094751,
+          "annualization": 252,
+          "riskfree": 0.0,
+          "max_drawdown": 0.3037849676066823,
+          "turnover": 120,
+          "trade_count": 120,
+          "completed_round_trips": 60,
+          "total_cost": 0.05889024431521249,
+          "total_cost_rate": 0.06
+        },
+        "buy_hold": {
+          "start_date": "2023-09-01",
+          "end_date": "2026-11-09",
+          "ending_wealth": 1.6418026632910103,
+          "gross_ending_wealth": 1.6434456981277161,
+          "total_return": 0.6418026632910103,
+          "gross_total_return": 0.6434456981277161,
+          "sharpe": 0.7097405731081644,
+          "annualization": 252,
+          "riskfree": 0.0,
+          "max_drawdown": 0.3567530456569321,
+          "turnover": 2,
+          "trade_count": 2,
+          "completed_round_trips": 1,
+          "total_cost": 0.0013213119876393249,
+          "total_cost_rate": 0.001
+        },
+        "mae": 0.012107161016389348,
+        "baseline_mae": 0.011925160231504384,
+        "r2_oos_vs_training_mean": -0.017872528615598293
+      }
+    },
+    "SPY": {
+      "bars": 1254,
+      "last_bar": "2026-11-09",
+      "retrieved_at": "2026-11-10T09:09:33.930155+00:00",
+      "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+      "native_cli_equivalence": true,
+      "recommendation": {
+        "action": "WATCHLIST",
+        "score": 69,
+        "evidence_coverage": 0.828571,
+        "score_kind": "heuristic_uncalibrated_not_probability",
+        "weights": {
+          "trend_following": 0.4,
+          "etf_structure": 0.6
+        },
+        "weight_denominator": 1.0,
+        "strong_recommendation_eligible": false,
+        "validation_status": "heuristic_only_not_performance_validated",
+        "evidence_limitations": [
+          "Incomplete ETF metric evidence: hhi, top10_weight"
+        ],
+        "diagnostic_score": 70.0,
+        "blockers": []
+      },
+      "out_of_sample": {
+        "samples": 799,
+        "strategy": {
+          "start_date": "2023-09-01",
+          "end_date": "2026-11-09",
+          "ending_wealth": 1.246606420209537,
+          "gross_ending_wealth": 1.3184265265418398,
+          "total_return": 0.24660642020953705,
+          "gross_total_return": 0.3184265265418398,
+          "sharpe": 0.6661689135716379,
+          "annualization": 252,
+          "riskfree": 0.0,
+          "max_drawdown": 0.1669636252219897,
+          "turnover": 112,
+          "trade_count": 112,
+          "completed_round_trips": 56,
+          "total_cost": 0.06137649913903724,
+          "total_cost_rate": 0.056
+        },
+        "buy_hold": {
+          "start_date": "2023-09-01",
+          "end_date": "2026-11-09",
+          "ending_wealth": 1.6356074447113074,
+          "gross_ending_wealth": 1.6372442796799178,
+          "total_return": 0.6356074447113074,
+          "gross_total_return": 0.6372442796799178,
+          "sharpe": 1.0798078359649599,
+          "annualization": 252,
+          "riskfree": 0.0,
+          "max_drawdown": 0.20006864633871402,
+          "turnover": 2,
+          "trade_count": 2,
+          "completed_round_trips": 1,
+          "total_cost": 0.0013182128287700387,
+          "total_cost_rate": 0.001
+        },
+        "mae": 0.006619414933730835,
+        "baseline_mae": 0.006489814092657282,
+        "r2_oos_vs_training_mean": -0.010720960206624719
+      }
+    }
+  },
+  "errors": {},
+  "strong_recommendations_promoted": false,
+  "sec_companyfacts": {
+    "status": "unavailable",
+    "error": "provider HTTP 403; no fallback data invented",
+    "alternative": "Dated Microsoft issuer release example, independently supplied; not a fabricated SEC result"
+  }
+}

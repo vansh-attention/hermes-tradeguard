@@ -1,0 +1,27 @@
+name: tradeguard
+version: "0.1.0"
+manifest_version: 2
+api_version: 1
+description: "Read-only stocks/ETF fundamental, technical and experimental ML research with evidence-aware abstention."
+author: Vansh Khosla
+license: MIT
+homepage: https://github.com/vansh-attention/hermes-tradeguard
+requires_hermes: ">=0.22.7"
+tags: [finance, equities, etf, research]
+provides_tools:
+  - tradeguard_recommend_tickers
+  - tradeguard_strategy_catalog
+  - tradeguard_equity_research
+  - tradeguard_public_history
+  - tradeguard_walk_forward
+  - tradeguard_microstructure
+  - tradeguard_rank
+provides_hooks: []
+capabilities: []
+requires_env: []
+python_dependencies: []
+config_schema:
+  allow_public_data:
+    type: bool
+    default: false
+    description: "Opt in to Yahoo unofficial historical-data requests, up to ten explicit tickers per batch; no keys/cookies/entitlement or real-time guarantee."

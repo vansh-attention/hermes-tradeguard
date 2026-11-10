@@ -1,0 +1,95 @@
+{
+  "success": true,
+  "model_status": "experimental_unvalidated",
+  "adjustment": "split",
+  "configuration": {
+    "min_train": 252,
+    "retrain_every": 21,
+    "cost_bps": 5.0,
+    "ridge_alpha": 10.0,
+    "max_rows": 4000
+  },
+  "summary": {
+    "samples": 799,
+    "strategy": {
+      "start_date": "2023-09-01",
+      "end_date": "2026-11-09",
+      "ending_wealth": 1.246606420209537,
+      "gross_ending_wealth": 1.3184265265418398,
+      "total_return": 0.24660642020953705,
+      "gross_total_return": 0.3184265265418398,
+      "sharpe": 0.6661689135716379,
+      "annualization": 252,
+      "riskfree": 0.0,
+      "max_drawdown": 0.1669636252219897,
+      "turnover": 112,
+      "trade_count": 112,
+      "completed_round_trips": 56,
+      "total_cost": 0.06137649913903724,
+      "total_cost_rate": 0.056
+    },
+    "buy_hold": {
+      "start_date": "2023-09-01",
+      "end_date": "2026-11-09",
+      "ending_wealth": 1.6356074447113074,
+      "gross_ending_wealth": 1.6372442796799178,
+      "total_return": 0.6356074447113074,
+      "gross_total_return": 0.6372442796799178,
+      "sharpe": 1.0798078359649599,
+      "annualization": 252,
+      "riskfree": 0.0,
+      "max_drawdown": 0.20006864633871402,
+      "turnover": 2,
+      "trade_count": 2,
+      "completed_round_trips": 1,
+      "total_cost": 0.0013182128287700387,
+      "total_cost_rate": 0.001
+    },
+    "mae": 0.006619414933730835,
+    "baseline_mae": 0.006489814092657282,
+    "r2_oos_vs_training_mean": -0.010720960206624719
+  },
+  "methodology": {
+    "target": "open[t+2] / open[t+1] - 1; signal observed after completed close[t]",
+    "purge": "training label end j+2 strictly before prediction row t; j <= t-3",
+    "validation": "chronological expanding training; no random cross-validation or tuning",
+    "features": {
+      "return5": "close[t] / close[t-5] - 1",
+      "return21": "close[t] / close[t-21] - 1",
+      "return63": "close[t] / close[t-63] - 1",
+      "vol20": "sample standard deviation of last 20 close-to-close simple returns",
+      "close_ma200_gap": "close[t] / mean(close[t-199:t+1]) - 1"
+    },
+    "scaling": "training-only mean and population standard deviation; constant scale=1",
+    "ridge": "sum squared errors + fixed ridge_alpha * sum(beta^2); unpenalized intercept",
+    "roundtrip_threshold": "prediction > 2 * cost_bps / 10000",
+    "fees": "per-side wealth-proportional fees on position changes and final liquidation",
+    "benchmark": "buy-and-hold over identical entry/exit dates with identical per-side fees",
+    "adjusted_close_policy": "validated if present but ignored; supplied OHLC is the sole price basis",
+    "annualization": "252 observations/year assumed, riskfree=0; sample standard deviation",
+    "max_drawdown": "maximum fractional peak-to-trough loss at OOS period ends, including initial wealth=1",
+    "trade_count": "one-sided position changes including final liquidation; binary long/cash",
+    "turnover": "sum absolute position changes including final liquidation, not annualized",
+    "total_cost": "sum actual fee debits in units of initial wealth=1, not currency",
+    "total_cost_rate": "sum per-side fee fractions (fee * turnover), not compounded wealth loss",
+    "r2_oos_vs_training_mean": "1 - model squared errors / squared errors of each fold training-mean forecasts",
+    "undefined_metrics": "R2 is null for zero baseline error; Sharpe null for fewer than two samples or zero volatility"
+  },
+  "data_requirements": [
+    "Completed daily OHLCV bars for one asset, venue, currency and consistent price units.",
+    "Unique increasing YYYY-MM-DD dates; no sorting, interpolation or silent truncation.",
+    "Caller must attest all OHLC are consistently split-normalized or all are raw.",
+    "Corporate-action provenance and a complete session calendar must be checked upstream."
+  ],
+  "limitations": [
+    "Experimental, unvalidated research baseline; no predictive edge or future returns established.",
+    "Not a replication of NBER Working Paper 25398 and not an HFT/latency model.",
+    "Hypothetical next-open fills, fractional full-wealth positions; no liquidity, impact or spread model beyond the supplied fee assumption.",
+    "Raw prices may contain split jumps; cash earns zero; dividends, taxes and financing are excluded.",
+    "The 2*fee signal threshold is a roundtrip approximation, not an exact compounded breakeven.",
+    "Repeated inspection or parameter selection on this report introduces selection bias."
+  ],
+  "symbol": "SPY",
+  "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+  "data_mode": "historical"
+}

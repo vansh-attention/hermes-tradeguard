@@ -1,0 +1,26 @@
+{
+  "run_at": "2026-11-10T16:57:26.597907+00:00",
+  "ledgers": {
+    "eq": {
+      "records": 28,
+      "cited_ids": 28,
+      "citation_occurrences": 48,
+      "errors": []
+    },
+    "micro": {
+      "records": 19,
+      "cited_ids": 19,
+      "citation_occurrences": 61,
+      "errors": []
+    }
+  },
+  "errors": [],
+  "mechanical_checks_only": true,
+  "license_network_enabled": false,
+  "source_records": 47,
+  "distinct_source_urls": 46,
+  "citation_occurrences": 109,
+  "repository_commit_pins": 9,
+  "runtime_research_families": 21,
+  "ok": true
+}

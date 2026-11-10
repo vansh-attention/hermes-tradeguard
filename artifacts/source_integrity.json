@@ -1,0 +1,78 @@
+{
+  "run_at": "2026-11-10T09:05:37.943677+00:00",
+  "ledgers": {
+    "eq": {
+      "records": 28,
+      "cited_ids": 28,
+      "citation_occurrences": 48,
+      "errors": []
+    },
+    "micro": {
+      "records": 19,
+      "cited_ids": 19,
+      "citation_occurrences": 61,
+      "errors": []
+    }
+  },
+  "errors": [],
+  "mechanical_checks_only": true,
+  "license_network_enabled": true,
+  "source_records": 47,
+  "distinct_source_urls": 46,
+  "citation_occurrences": 109,
+  "repository_commit_pins": 9,
+  "pinned_license_files": [
+    {
+      "url": "https://raw.githubusercontent.com/Nixtla/mlforecast/16cabe15f701197491384bd3108d6c6ac1edaff7/LICENSE",
+      "sha256": "030fe23d30721acfd64bd519f6c904536106882fc64a6ea1de437dedb68386c8",
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/PyPortfolio/PyPortfolioOpt/a6638d2e06dae6f444fd022cfd4b3c528902a85b/LICENSE",
+      "sha256": "0e401d63a7b31bde363ca577a2537af1c345fccbf532edc55cb589f568b2a883",
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/QuantConnect/Lean/3afb212b30eff5e73013b5130887a95bf9e4cb4b/LICENSE",
+      "sha256": "522cf0a716ce03f67d46f8fceb5bf78c5b84400ec5cd8d14bf9f02cddc1cb6ba",
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/dcajasn/Riskfolio-Lib/344b899eb72e5636330647f08e3c5d88a8f71a84/LICENSE.txt",
+      "sha256": "7f7a68d261604e432e818993f92b74b636c632e31f207730dd189267044aa5e6",
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mementum/backtrader/b853d7c90b6721476eb5a5ea3135224e33db1f14/LICENSE",
+      "sha256": "e1c0ad728983d8a57335e52cf1064f1affd1d454173d8cebd3ed8b4a72b48704",
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mementum/backtrader/b853d7c90b6721476eb5a5ea3135224e33db1f14/backtrader/__init__.py",
+      "sha256": "763f463ccb8f0d68145c19ebb790f1b9342542c507c02b4917763354a80d9431",
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/qlib/54355232463878d2eebb91fe0ee5fa7fa1f5976c/LICENSE",
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pmorissette/bt/0c8f521fa19704392ee182bf838b42607e236c5e/LICENSE",
+      "sha256": "8711471566d722d55eca3f09196f342b2ee2960616e68127ec2a17b39ff99949",
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn/13ae2043119dc139698f32cca3a116c429748fd0/COPYING",
+      "sha256": "50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0",
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/statsmodels/statsmodels/9d9d9fe9e03cea967492b342907338d9081c3e6c/LICENSE.txt",
+      "sha256": "1ca78e1dec9dcebc55f3b96a862317f23e76422c5fc943568d955aad1f6b5fad",
+      "verified": true
+    }
+  ],
+  "runtime_research_families": 21,
+  "ok": true
+}

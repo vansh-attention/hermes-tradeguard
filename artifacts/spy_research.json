@@ -1,0 +1,306 @@
+{
+  "success": true,
+  "as_of": "2026-11-10",
+  "symbol": "SPY",
+  "asset_type": "etf",
+  "currency": "USD",
+  "research_only": true,
+  "model_status": "unvalidated_heuristic",
+  "recommendation": {
+    "action": "WATCHLIST",
+    "score": 69,
+    "evidence_coverage": 0.828571,
+    "score_kind": "heuristic_uncalibrated_not_probability",
+    "weights": {
+      "trend_following": 0.4,
+      "etf_structure": 0.6
+    },
+    "weight_denominator": 1.0,
+    "strong_recommendation_eligible": false,
+    "validation_status": "heuristic_only_not_performance_validated",
+    "evidence_limitations": [
+      "Incomplete ETF metric evidence: hhi, top10_weight"
+    ],
+    "diagnostic_score": 70.0,
+    "blockers": []
+  },
+  "confidence": {
+    "label": "partial_evidence_coverage",
+    "coverage": 0.828571,
+    "meaning": "evidence_coverage_not_win_probability"
+  },
+  "validation_errors": [],
+  "missing_data": [
+    "etf.hhi",
+    "etf.top10_weight",
+    "etf.benchmark_returns"
+  ],
+  "warnings": [
+    "Unofficial personal-research source, not an entitled executable quote.",
+    "Chart OHLC is provider-reported split-adjusted; dividends NOT included. No total-return claim.",
+    "All candles on retrieval's exchange date excluded, even if that session may have closed.",
+    "Incomplete provider rows skipped: 0. Missing sessions are not filled.",
+    "Only 10 largest holdings, not a full portfolio.",
+    "Metadata as_of conservatively uses oldest supplied component: holdings Nov 06. NAV has its own Nov 09 valuation date.",
+    "Gross expense ratio, fractional annual units; .000945 = .0945%.",
+    "Issuer premium/discount uses 4pm bid/ask midpoint vs INAV; close/NAV calculation here is a different statistic.",
+    "Partial holdings: observed HHI/top10 are lower bounds, not full concentration",
+    "Incomplete ETF metric evidence: hhi, top10_weight"
+  ],
+  "metrics": {
+    "technical": {
+      "sma20": 762.0929901123047,
+      "sma50": 765.3465954589843,
+      "sma200": 730.6998489379882,
+      "ema12": 754.8537748581807,
+      "ema26": 760.6838795237464,
+      "macd": -5.830104665565727,
+      "rsi14": 45.81270573772669,
+      "atr14": 11.18625581225601,
+      "vol20": 0.2204178952159518,
+      "max_drawdown": -0.25360573583036905,
+      "return21": -0.0332404339229001,
+      "return63": -0.023190919816504785,
+      "return252": 0.12289836819211608,
+      "momentum12_1": 0.16150737742228238,
+      "dollar_volume20": 36843768687.665405
+    },
+    "fundamental": {},
+    "fundamentals": {},
+    "etf": {
+      "expense_ratio": 0.000945,
+      "nav_premium": 1.328910215003809e-05,
+      "holdings_weight_coverage": 0.3757,
+      "hhi_observed": 0.01927309,
+      "top10_weight_observed": 0.3757,
+      "hhi": null,
+      "top10_weight": null
+    },
+    "benchmark": {
+      "tracking_error": null,
+      "relative_return21": null,
+      "relative_return63": null,
+      "relative_return252": null
+    }
+  },
+  "sources": {
+    "prices": {
+      "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+      "retrieved_at": "2026-11-10T09:09:33.930155+00:00",
+      "data_mode": "historical",
+      "adjustment": "split",
+      "currency": "USD",
+      "interval": "1d"
+    },
+    "etf": {
+      "source": "State Street SPY issuer page retrieved Nov 10 2026; top holdings Nov 06, NAV Nov 09",
+      "as_of": "2026-11-06",
+      "nav_date": "2026-11-09"
+    }
+  },
+  "coverage": {
+    "technical": {
+      "available": 15,
+      "total": 15,
+      "fraction": 1.0,
+      "status": "complete",
+      "age_days": 1
+    },
+    "fundamentals": {
+      "status": "not_applicable"
+    },
+    "etf": {
+      "available": 5,
+      "total": 7,
+      "fraction": 0.7142857142857143,
+      "status": "partial",
+      "age_days": 4
+    },
+    "benchmark": {
+      "available": 0,
+      "total": 4,
+      "fraction": 0.0,
+      "status": "partial"
+    }
+  },
+  "strategies": {
+    "trend_following": {
+      "horizon": "technical_swing_weeks_to_months",
+      "score": 85,
+      "max_score": 100,
+      "weight_denominator": 100,
+      "evidence_coverage": 1.0,
+      "checks": [
+        {
+          "criterion": "price_to_sma200",
+          "weight": 25,
+          "value": 1.0300946462974898,
+          "passed": true,
+          "rule": "1.000000001 <= price_to_sma200 <= inf"
+        },
+        {
+          "criterion": "sma50_to_sma200",
+          "weight": 20,
+          "value": 1.0474158391730233,
+          "passed": true,
+          "rule": "1.000000001 <= sma50_to_sma200 <= inf"
+        },
+        {
+          "criterion": "momentum12_1",
+          "weight": 20,
+          "value": 0.16150737742228238,
+          "passed": true,
+          "rule": "1e-12 <= momentum12_1 <= inf"
+        },
+        {
+          "criterion": "return63",
+          "weight": 15,
+          "value": -0.023190919816504785,
+          "passed": false,
+          "rule": "1e-12 <= return63 <= inf"
+        },
+        {
+          "criterion": "vol20",
+          "weight": 10,
+          "value": 0.2204178952159518,
+          "passed": true,
+          "rule": "0 <= vol20 <= 0.4"
+        },
+        {
+          "criterion": "dollar_volume20",
+          "weight": 10,
+          "value": 36843768687.665405,
+          "passed": true,
+          "rule": "1000000 <= dollar_volume20 <= inf"
+        }
+      ],
+      "bullish_reasons": [
+        "Supported: 1.000000001 <= price_to_sma200 <= inf",
+        "Supported: 1.000000001 <= sma50_to_sma200 <= inf",
+        "Supported: 1e-12 <= momentum12_1 <= inf",
+        "Supported: 0 <= vol20 <= 0.4",
+        "Supported: 1000000 <= dollar_volume20 <= inf"
+      ],
+      "bearish_reasons": [
+        "Not supported: 1e-12 <= return63 <= inf"
+      ],
+      "action": "RESEARCH_CANDIDATE",
+      "hypothesis_only": true
+    },
+    "mean_reversion": {
+      "horizon": "technical_swing_days_to_weeks",
+      "score": 40,
+      "max_score": 60,
+      "weight_denominator": 100,
+      "evidence_coverage": 1.0,
+      "checks": [
+        {
+          "criterion": "rsi14",
+          "weight": 40,
+          "value": 45.81270573772669,
+          "passed": false,
+          "rule": "20 <= rsi14 <= 35"
+        },
+        {
+          "criterion": "price_to_sma20",
+          "weight": 20,
+          "value": 0.9876616268711345,
+          "passed": false,
+          "rule": "0.9 <= price_to_sma20 <= 0.98"
+        },
+        {
+          "criterion": "price_to_sma200",
+          "weight": 20,
+          "value": 1.0300946462974898,
+          "passed": true,
+          "rule": "1 <= price_to_sma200 <= inf"
+        },
+        {
+          "criterion": "vol20",
+          "weight": 10,
+          "value": 0.2204178952159518,
+          "passed": true,
+          "rule": "0 <= vol20 <= 0.35"
+        },
+        {
+          "criterion": "dollar_volume20",
+          "weight": 10,
+          "value": 36843768687.665405,
+          "passed": true,
+          "rule": "1000000 <= dollar_volume20 <= inf"
+        }
+      ],
+      "bullish_reasons": [
+        "Supported: 1 <= price_to_sma200 <= inf",
+        "Supported: 0 <= vol20 <= 0.35",
+        "Supported: 1000000 <= dollar_volume20 <= inf"
+      ],
+      "bearish_reasons": [
+        "Not supported: 20 <= rsi14 <= 35",
+        "Not supported: 0.9 <= price_to_sma20 <= 0.98"
+      ],
+      "action": "AVOID_OR_WAIT",
+      "hypothesis_only": true
+    },
+    "etf_structure": {
+      "horizon": "etf_costs_and_structure_long_term",
+      "score": 60,
+      "max_score": 100,
+      "weight_denominator": 100,
+      "evidence_coverage": 0.6,
+      "checks": [
+        {
+          "criterion": "expense_ratio",
+          "weight": 30,
+          "value": 0.000945,
+          "passed": true,
+          "rule": "0 <= expense_ratio <= 0.0025"
+        },
+        {
+          "criterion": "absolute_nav_premium",
+          "weight": 20,
+          "value": 1.328910215003809e-05,
+          "passed": true,
+          "rule": "0 <= absolute_nav_premium <= 0.005"
+        },
+        {
+          "criterion": "hhi",
+          "weight": 20,
+          "value": null,
+          "passed": null,
+          "rule": "0 <= hhi <= 0.1"
+        },
+        {
+          "criterion": "top10_weight",
+          "weight": 20,
+          "value": null,
+          "passed": null,
+          "rule": "0 <= top10_weight <= 0.6"
+        },
+        {
+          "criterion": "dollar_volume20",
+          "weight": 10,
+          "value": 36843768687.665405,
+          "passed": true,
+          "rule": "1000000 <= dollar_volume20 <= inf"
+        }
+      ],
+      "bullish_reasons": [
+        "Supported: 0 <= expense_ratio <= 0.0025",
+        "Supported: 0 <= absolute_nav_premium <= 0.005",
+        "Supported: 1000000 <= dollar_volume20 <= inf"
+      ],
+      "bearish_reasons": [
+        "Missing evidence: 0 <= hhi <= 0.1",
+        "Missing evidence: 0 <= top10_weight <= 0.6",
+        "Incomplete ETF metric evidence: hhi, top10_weight"
+      ],
+      "action": "ABSTAIN",
+      "hypothesis_only": true
+    },
+    "value_quality": {
+      "status": "not_applicable",
+      "reason": "Company earnings do not value the ETF entity"
+    }
+  }
+}

@@ -1,0 +1,692 @@
+{
+  "schema_version": 1,
+  "research_date": "2026-11-10",
+  "research_timezone": "Asia/Kolkata",
+  "scope": "Selective primary-source coverage of microstructure features, execution constraints, ETF arbitrage, financial ML validation, and optional code references; not an exhaustive strategy inventory.",
+  "citation_format": "Markdown [id] citations map to numeric source ids below. Ids retain the retrieval ledger numbering and are intentionally non-contiguous.",
+  "evidence_policy": "Short verbatim excerpts were checked against retrieved full text or official repository files. Supports and limitations are paraphrases. Proposed TradeGuard safeguards in the report are research design recommendations, not measured results.",
+  "retrieval_notes": [
+    "Audit fetched primary paper PDFs directly and extracted their text using pdftotext. The Cont–Kukanov–Stoikov file is arXiv v3, not v2; versioned URLs are now used for all three arXiv papers.",
+    "Purging/embargo rationale is verified on the author’s Innovations page. The detailed nested walk-forward procedure remains a proposed protocol, not a verbatim textbook replication.",
+    "CFTC Q&A supports its intent-based definition and CEA/DCM/SEF scope, not a blanket cancellation safe harbor or complete current equity law.",
+    "Official LICENSE and README references now use full commit SHAs. Qlib and LEAN share the already-recorded equity pins; MLforecast was pinned to the retrieved commit and re-fetched at that SHA.",
+    "No packages installed, binaries inspected, trading settings changed or broker actions performed. Code licenses do not establish market-data rights.",
+    "Native search/extraction failed; search used fallback providers and direct document retrieval. No separately callable web.run tool was exposed."
+  ],
+  "sources": [
+    {
+      "id": 2,
+      "title": "The Micro-Price",
+      "authors": [
+        "Sasha Stoikov"
+      ],
+      "source_type": "author conference slides hosted by Imperial College",
+      "url": "https://www.ma.imperial.ac.uk/~ajacquie/Gatheral60/Slides/Gatheral60%20-%20Stoikov.pdf",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Opposite-size-weighted midpoint",
+        "Conditional-expectation microprice definition",
+        "Model-dependent convergence and transition-based correction"
+      ],
+      "limitations": "Slides do not justify treating every queue-weighted quote as a calibrated microprice or assuming martingale properties without the stated model conditions.",
+      "evidence": {
+        "excerpt": "where the approximating sequence of martingale prices is given by",
+        "locator": "Slide headed Micro-price definition"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://www.ma.imperial.ac.uk/~ajacquie/Gatheral60/Slides/Gatheral60%20-%20Stoikov.pdf",
+        "http_status": 200,
+        "extracted_text_sha256": "eaf977f13c0d45d38ca90b91b5bdcf2d2a037e56f64bf06e7fbcdb63e9a767ee",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "906b3d99cc38e511d3cea86fa381000809c217c231e6cdc4a0353e62bbad2fdd"
+      }
+    },
+    {
+      "id": 4,
+      "title": "High-frequency trading in a limit order book",
+      "authors": [
+        "Marco Avellaneda",
+        "Sasha Stoikov"
+      ],
+      "publication_year": 2008,
+      "source_type": "published paper in author university archive",
+      "url": "https://math.nyu.edu/inmemoriam/avellaneda/HighFrequencyTrading.pdf",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Inventory-sensitive reservation price",
+        "Risk aversion and remaining-horizon dependence",
+        "Modeled execution arrival intensities"
+      ],
+      "limitations": "Stylized price and arrival assumptions; not a universally optimal live quoting rule.",
+      "evidence": {
+        "excerpt": "inventory risk arising from uncertainty in the asset’s value",
+        "locator": "Introduction, first page"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://math.nyu.edu/inmemoriam/avellaneda/HighFrequencyTrading.pdf",
+        "http_status": 200,
+        "extracted_text_sha256": "353b795029a9bc74f3d7aefea7113374ef298c05fb79530eedc213025f735d86",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "71fa9268339ae82365171caa7416833b3a5d584f05e4f4c087c4ae72d7121a8d"
+      }
+    },
+    {
+      "id": 7,
+      "title": "The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting and Non-Normality",
+      "authors": [
+        "David H. Bailey",
+        "Marcos López de Prado"
+      ],
+      "publication_year": 2014,
+      "version_note": "Author PDF dated July 31, 2014",
+      "source_type": "author paper",
+      "url": "https://www.davidhbailey.com/dhbpapers/deflated-sharpe.pdf",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Selection-aware Sharpe assessment",
+        "Skewness and kurtosis adjustment",
+        "Expected-maximum threshold and effective independent trial count"
+      ],
+      "limitations": "Distributional and dependence assumptions matter; the statistic does not provide a future-profit guarantee.",
+      "evidence": {
+        "excerpt": "DSR is a PSR",
+        "locator": "Section discussing the Deflated Sharpe Ratio"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://www.davidhbailey.com/dhbpapers/deflated-sharpe.pdf",
+        "http_status": 200,
+        "extracted_text_sha256": "8ef6b4e94c7f540ef6b74df4bc4a71b4d22dc30680d287817c9294b4e62d8f3c",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "ca4a1e834a2954b84eb560776e903329cd9cef318d458aadf6d67bc8166d10b5"
+      }
+    },
+    {
+      "id": 8,
+      "title": "The Probability of Backtest Overfitting",
+      "authors": [
+        "David H. Bailey",
+        "Jonathan M. Borwein",
+        "Marcos López de Prado",
+        "Qiji Jim Zhu"
+      ],
+      "publication_year": 2015,
+      "version_note": "Author PDF dated February 27, 2015",
+      "source_type": "author paper",
+      "url": "https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "CSCV definition of PBO",
+        "In-sample winner versus out-of-sample median",
+        "Selection and performance-decay diagnostics"
+      ],
+      "limitations": "Requires candidate performance histories; not a forward-deployment probability or replacement for chronological testing.",
+      "evidence": {
+        "excerpt": "median OOS while remaining optimal IS",
+        "locator": "Introduction, definition of PBO"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf",
+        "http_status": 200,
+        "extracted_text_sha256": "d0973da2a58cee0f956e1e30b0908e8e39b505dfe1bd779b61125c0a7f7e5644",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "d8bfbadaaedb430d9dec929646d92f3580fdf18238f34121ae7738fa1c69a63d"
+      }
+    },
+    {
+      "id": 11,
+      "title": "The price impact of order book events",
+      "authors": [
+        "Rama Cont",
+        "Arseniy Kukanov",
+        "Sasha Stoikov"
+      ],
+      "publication_year": 2014,
+      "version_note": "Inspected arXiv:1011.6402v3, dated April 13, 2011; journal publication year 2014 is distinct.",
+      "source_type": "author preprint",
+      "url": "https://arxiv.org/pdf/1011.6402v3",
+      "canonical_url": "https://arxiv.org/abs/1011.6402",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Event-level OFI equation",
+        "Same-window linear price-impact relation",
+        "Inverse-depth impact slope"
+      ],
+      "limitations": "Contemporaneous explanatory fit is not evidence of executable future-return prediction.",
+      "evidence": {
+        "excerpt": "linear relation between order flow imbalance and price changes",
+        "locator": "Abstract"
+      },
+      "unversioned_url": "https://arxiv.org/pdf/1011.6402",
+      "version_pinned": true,
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://arxiv.org/pdf/1011.6402v3",
+        "http_status": 200,
+        "extracted_text_sha256": "bcaf855fe8474744bb75d0fa29e85ebce95182d88831cf25a6341695557b07f4",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "40d1d5f0baf7944a1b9f4c12d3644038e657acf4a3dfb500b2057c2269edd25f"
+      }
+    },
+    {
+      "id": 12,
+      "title": "Queue Imbalance as a One-Tick-Ahead Price Predictor in a Limit Order Book",
+      "authors": [
+        "Martin D. Gould",
+        "Julius Bonart"
+      ],
+      "publication_year": 2015,
+      "version_note": "Inspected arXiv:1512.03492v1, submitted December 11, 2015; PDF title date December 14, 2015.",
+      "source_type": "author preprint",
+      "url": "https://arxiv.org/pdf/1512.03492v1",
+      "canonical_url": "https://arxiv.org/abs/1512.03492",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Queue-imbalance feature",
+        "Prediction of the next midpoint direction",
+        "Different large-tick and small-tick behavior"
+      ],
+      "limitations": "Direction/probability prediction is not a costed execution strategy.",
+      "evidence": {
+        "excerpt": "direction of the next mid-price movement",
+        "locator": "Abstract"
+      },
+      "unversioned_url": "https://arxiv.org/pdf/1512.03492",
+      "version_pinned": true,
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://arxiv.org/pdf/1512.03492v1",
+        "http_status": 200,
+        "extracted_text_sha256": "6aaf6a9803b136c4d8dcf71557b4063d09dad4028949c4f5a011498c386289cc",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "a5051285adfe2d8a2d7f46a758486f357d556a46a964bc89b245de7e7a0bc338"
+      }
+    },
+    {
+      "id": 14,
+      "title": "The High-Frequency Trading Arms Race: Frequent Batch Auctions as a Market Design Response",
+      "authors": [
+        "Eric Budish",
+        "Peter Cramton",
+        "John Shim"
+      ],
+      "publication_year": 2015,
+      "source_type": "published paper in author university archive",
+      "url": "https://www.cramton.umd.edu/papers2015-2019/budish-cramton-shim-hft-frequent-batch-auctions.pdf",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Speed competition around public information",
+        "Stale-quote sniping and latency economics",
+        "Market-design dependence of HFT opportunities"
+      ],
+      "limitations": "A market-design argument, not a guarantee of profitable latency arbitrage for a specific participant.",
+      "evidence": {
+        "excerpt": "race to respond to symmetrically observed public information",
+        "locator": "Introduction, discussion of modeling market rules"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://www.cramton.umd.edu/papers2015-2019/budish-cramton-shim-hft-frequent-batch-auctions.pdf",
+        "http_status": 200,
+        "extracted_text_sha256": "94e89add18747f9a4fe8d53474e6fab47d7e6474ab8312536bad097a3b18b7c1",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "be041bd52cba6cfc2496c5fe73ee0c462d871d50ecb12471f5a684fea6b3c143"
+      }
+    },
+    {
+      "id": 16,
+      "title": "Common pitfalls and recommended practices",
+      "organization": "scikit-learn",
+      "source_type": "official documentation",
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Train-only preprocessing",
+        "Identical frozen transforms on held-out data",
+        "Pipeline-based leakage avoidance"
+      ],
+      "limitations": "General ML guidance; financial label purging and point-in-time availability need additional safeguards.",
+      "evidence": {
+        "excerpt": "Always split the data into train and test subsets first",
+        "locator": "How to avoid data leakage"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://scikit-learn.org/stable/common_pitfalls.html",
+        "http_status": 200,
+        "extracted_text_sha256": "df6b4b1ddfe23d505cc8465bfe2a7dce9fcf2ab2a6bbaaeb9994c8012a192f31",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "21fac11c181ab35624dcf8673f0475d403d4f6ecf0f9bead01a573d7642b515c"
+      }
+    },
+    {
+      "id": 17,
+      "title": "Qlib LICENSE",
+      "organization": "Microsoft",
+      "source_type": "official repository license",
+      "url": "https://raw.githubusercontent.com/microsoft/qlib/54355232463878d2eebb91fe0ee5fa7fa1f5976c/LICENSE",
+      "repository_url": "https://github.com/microsoft/qlib",
+      "accessed_on": "2026-11-10",
+      "license_spdx": "MIT",
+      "supports": [
+        "Repository code license is MIT"
+      ],
+      "limitations": "Does not establish licenses for independent data sources or all dependencies.",
+      "evidence": {
+        "excerpt": "MIT License Copyright (c) Microsoft Corporation.",
+        "locator": "LICENSE heading and copyright notice"
+      },
+      "previous_moving_url": "https://raw.githubusercontent.com/microsoft/qlib/main/LICENSE",
+      "repository": "microsoft/qlib",
+      "revision": "54355232463878d2eebb91fe0ee5fa7fa1f5976c",
+      "revision_date": "2026-10-08T10:15:27Z",
+      "license_raw_url": "https://raw.githubusercontent.com/microsoft/qlib/54355232463878d2eebb91fe0ee5fa7fa1f5976c/LICENSE",
+      "license_url": "https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/LICENSE",
+      "license_sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+      "license_revision_verified": true,
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://raw.githubusercontent.com/microsoft/qlib/54355232463878d2eebb91fe0ee5fa7fa1f5976c/LICENSE",
+        "http_status": 200,
+        "extracted_text_sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+      }
+    },
+    {
+      "id": 18,
+      "title": "LEAN LICENSE",
+      "organization": "QuantConnect",
+      "source_type": "official repository license",
+      "url": "https://raw.githubusercontent.com/QuantConnect/Lean/3afb212b30eff5e73013b5130887a95bf9e4cb4b/LICENSE",
+      "repository_url": "https://github.com/QuantConnect/Lean",
+      "accessed_on": "2026-11-10",
+      "license_spdx": "Apache-2.0",
+      "supports": [
+        "Repository code license is Apache 2.0"
+      ],
+      "limitations": "Does not imply market-data entitlements or permission to reuse every connected provider's data.",
+      "evidence": {
+        "excerpt": "Apache License Version 2.0, January 2004",
+        "locator": "LICENSE heading and version"
+      },
+      "previous_moving_url": "https://raw.githubusercontent.com/QuantConnect/Lean/master/LICENSE",
+      "repository": "QuantConnect/Lean",
+      "revision": "3afb212b30eff5e73013b5130887a95bf9e4cb4b",
+      "revision_date": "2026-11-09T16:25:37Z",
+      "license_raw_url": "https://raw.githubusercontent.com/QuantConnect/Lean/3afb212b30eff5e73013b5130887a95bf9e4cb4b/LICENSE",
+      "license_url": "https://github.com/QuantConnect/Lean/blob/3afb212b30eff5e73013b5130887a95bf9e4cb4b/LICENSE",
+      "license_sha256": "522cf0a716ce03f67d46f8fceb5bf78c5b84400ec5cd8d14bf9f02cddc1cb6ba",
+      "license_revision_verified": true,
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://raw.githubusercontent.com/QuantConnect/Lean/3afb212b30eff5e73013b5130887a95bf9e4cb4b/LICENSE",
+        "http_status": 200,
+        "extracted_text_sha256": "522cf0a716ce03f67d46f8fceb5bf78c5b84400ec5cd8d14bf9f02cddc1cb6ba",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "522cf0a716ce03f67d46f8fceb5bf78c5b84400ec5cd8d14bf9f02cddc1cb6ba"
+      }
+    },
+    {
+      "id": 19,
+      "title": "MLforecast LICENSE",
+      "organization": "Nixtla",
+      "source_type": "official repository license",
+      "url": "https://raw.githubusercontent.com/Nixtla/mlforecast/16cabe15f701197491384bd3108d6c6ac1edaff7/LICENSE",
+      "repository_url": "https://github.com/Nixtla/mlforecast",
+      "accessed_on": "2026-11-10",
+      "license_spdx": "Apache-2.0",
+      "supports": [
+        "Repository code license is Apache 2.0"
+      ],
+      "limitations": "A software license is not a financial-data license or validation certificate.",
+      "evidence": {
+        "excerpt": "Apache License Version 2.0, January 2004",
+        "locator": "LICENSE heading and version"
+      },
+      "previous_moving_url": "https://raw.githubusercontent.com/Nixtla/mlforecast/main/LICENSE",
+      "repository": "Nixtla/mlforecast",
+      "revision": "16cabe15f701197491384bd3108d6c6ac1edaff7",
+      "revision_date": "2026-11-06T20:06:02Z",
+      "license_raw_url": "https://raw.githubusercontent.com/Nixtla/mlforecast/16cabe15f701197491384bd3108d6c6ac1edaff7/LICENSE",
+      "license_url": "https://github.com/Nixtla/mlforecast/blob/16cabe15f701197491384bd3108d6c6ac1edaff7/LICENSE",
+      "license_sha256": "030fe23d30721acfd64bd519f6c904536106882fc64a6ea1de437dedb68386c8",
+      "license_revision_verified": true,
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://raw.githubusercontent.com/Nixtla/mlforecast/16cabe15f701197491384bd3108d6c6ac1edaff7/LICENSE",
+        "http_status": 200,
+        "extracted_text_sha256": "030fe23d30721acfd64bd519f6c904536106882fc64a6ea1de437dedb68386c8",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "030fe23d30721acfd64bd519f6c904536106882fc64a6ea1de437dedb68386c8"
+      }
+    },
+    {
+      "id": 27,
+      "title": "Questions and Answers: Interpretive Guidance and Policy Statement on Disruptive Practices",
+      "organization": "U.S. Commodity Futures Trading Commission",
+      "source_type": "official regulatory guidance",
+      "url": "https://www.cftc.gov/sites/default/files/idc/groups/public/%40newsroom/documents/file/dtpinterpretiveorder_qa.pdf",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Intent-to-cancel definition in CEA section 4c(a)(5)(C)",
+        "Scope involving CFTC-registered entities including DCMs and SEFs; not an equity-law survey"
+      ],
+      "limitations": "This Q&A does not itself document a blanket good-faith-cancellation safe harbor, all prohibited conduct, or all current equity-venue rules.",
+      "evidence": {
+        "excerpt": "intent to cancel the bid or offer before execution",
+        "locator": "Opening quotation of CEA section 4c(a)(5)(C)"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://www.cftc.gov/sites/default/files/idc/groups/public/%40newsroom/documents/file/dtpinterpretiveorder_qa.pdf",
+        "http_status": 200,
+        "extracted_text_sha256": "f5f04f9dc04a56a47e92b7256829e5a8903d0883b77733de999e1ef4498e1eca",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "da30da688d059a802a43bd9184eb0e7fccc023a5e56f3ca239ea2362cbc314e8"
+      }
+    },
+    {
+      "id": 34,
+      "title": "ETF Arbitrage under Liquidity Mismatch",
+      "authors": [
+        "Kevin Pan",
+        "Yao Zeng"
+      ],
+      "publication_year": 2017,
+      "version_note": "June 2017 NBER conference version",
+      "source_type": "author conference paper hosted by NBER",
+      "url": "https://conference.nber.org/confer/2017/LTAMs17/Pan_Zeng.pdf",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Authorized participant primary-market role",
+        "Corporate-bond ETF liquidity mismatch",
+        "Inventory and dealer constraints on arbitrage"
+      ],
+      "limitations": "Corporate-bond ETF findings should not be generalized mechanically to every ETF; current fund mechanics require separate documentation.",
+      "evidence": {
+        "excerpt": "only market participants that can trade directly with ETF issuers",
+        "locator": "Abstract"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://conference.nber.org/confer/2017/LTAMs17/Pan_Zeng.pdf",
+        "http_status": 200,
+        "extracted_text_sha256": "cb045514fea95e084cfc78f45aad9fdb0763958a2b4cb0686653dc96f4843ab1",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "0ca71c7a689931452c6807dc262356806f6ce672e092e364306b6b6c9cf3c982"
+      }
+    },
+    {
+      "id": 39,
+      "title": "Empirical Asset Pricing via Machine Learning",
+      "authors": [
+        "Shihao Gu",
+        "Bryan Kelly",
+        "Dacheng Xiu"
+      ],
+      "publication_year": 2018,
+      "version_note": "NBER Working Paper 25398, revised September 2019",
+      "source_type": "NBER working paper",
+      "url": "https://nber.org/system/files/working_papers/w25398/w25398.pdf",
+      "canonical_url": "https://www.nber.org/papers/w25398",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Comparative financial ML models",
+        "Nonlinear predictor interactions",
+        "Chronological train/validation/test splits and annual updating",
+        "Monthly asset-pricing scope"
+      ],
+      "limitations": "Does not establish a current, executable HFT strategy or expected net returns for TradeGuard.",
+      "evidence": {
+        "excerpt": "three disjoint time periods that maintain the temporal ordering",
+        "locator": "Section 2.1, Sample Splitting and Tuning via Validation"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://nber.org/system/files/working_papers/w25398/w25398.pdf",
+        "http_status": 200,
+        "extracted_text_sha256": "ade9668bc65513b4e121dff146121ce59f9575d4ecc6000efe6f967be8041d2b",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "cf4ebd0a103c7714235c8e464e060c96f9f7332c4e82b2219f2560767d928c66"
+      }
+    },
+    {
+      "id": 40,
+      "title": "Innovations",
+      "authors": [
+        "Marcos López de Prado"
+      ],
+      "source_type": "author's research-method index",
+      "url": "https://www.quantresearch.org/Innovations.htm",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Original rationale for purging/embargo: label overlap and serial conditionality",
+        "Purged CV and CPCV identification"
+      ],
+      "limitations": "An overview rather than the full textbook chapter. Detailed walk-forward timing and gap rules in the report are explicitly proposed protocol, not a verbatim author algorithm.",
+      "evidence": {
+        "excerpt": "due to labels overlap and serial conditionality",
+        "locator": "K-Fold CV with Purging & Embargo entry"
+      },
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://www.quantresearch.org/Innovations.htm",
+        "http_status": 200,
+        "extracted_text_sha256": "e3f0ed6ca1dd383889969ffaffe3f94a4a299dccc99e1b9643cc73cc57a8e81f",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "85586bba0c47d8f2dfb53f1021a4f6ce1a57c1a44f2a97f7df207df4262b22a9"
+      }
+    },
+    {
+      "id": 41,
+      "title": "Simulating and analyzing order book data: The queue-reactive model",
+      "authors": [
+        "Weibing Huang",
+        "Charles-Albert Lehalle",
+        "Mathieu Rosenbaum"
+      ],
+      "publication_year": 2014,
+      "version_note": "Retrieved arXiv v2 submitted September 3, 2014; PDF dated September 5, 2014",
+      "source_type": "author preprint",
+      "url": "https://arxiv.org/pdf/1312.0563v2",
+      "canonical_url": "https://arxiv.org/abs/1312.0563",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Event-level queue simulation",
+        "State-dependent order intensities",
+        "FIFO queue priority and execution probability",
+        "Cancellation-assumption limitations"
+      ],
+      "limitations": "Aggregate-book cancellation allocation can overstate fill probability; exchange matching rules and order-level information affect reconstruction.",
+      "evidence": {
+        "excerpt": "Under the first in first out rule",
+        "locator": "Introduction; see also Section 2.5 for execution probability"
+      },
+      "publication_year_note": "Year of inspected preprint, not a claim of the final journal publication year.",
+      "unversioned_url": "https://arxiv.org/pdf/1312.0563",
+      "version_pinned": true,
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://arxiv.org/pdf/1312.0563v2",
+        "http_status": 200,
+        "extracted_text_sha256": "651313d1a54bb8cb721598761d4358849302bf3d01e94361539dcc94516de77e",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "1da383203ad6591aff589171a8b62697a04e0c5bf26e554a95975a02957990b1"
+      }
+    },
+    {
+      "id": 42,
+      "title": "LEAN repository readme",
+      "organization": "QuantConnect",
+      "source_type": "official repository documentation",
+      "url": "https://raw.githubusercontent.com/QuantConnect/Lean/3afb212b30eff5e73013b5130887a95bf9e4cb4b/readme.md",
+      "repository_url": "https://github.com/QuantConnect/Lean",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Event-driven algorithmic trading and backtesting engine"
+      ],
+      "limitations": "Listed only as an implementation reference; no installation, validation, or TradeGuard integration was performed.",
+      "evidence": {
+        "excerpt": "LEAN is an event-driven",
+        "locator": "Opening product description"
+      },
+      "previous_moving_url": "https://raw.githubusercontent.com/QuantConnect/Lean/master/readme.md",
+      "repository": "QuantConnect/Lean",
+      "revision": "3afb212b30eff5e73013b5130887a95bf9e4cb4b",
+      "revision_date": "2026-11-09T16:25:37Z",
+      "documentation_sha256": "c93d2d649740ffdbfeca35ee5035eff668dc1f0a6b97873756addb70f4f4b91e",
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://raw.githubusercontent.com/QuantConnect/Lean/3afb212b30eff5e73013b5130887a95bf9e4cb4b/readme.md",
+        "http_status": 200,
+        "extracted_text_sha256": "c93d2d649740ffdbfeca35ee5035eff668dc1f0a6b97873756addb70f4f4b91e",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "c93d2d649740ffdbfeca35ee5035eff668dc1f0a6b97873756addb70f4f4b91e"
+      }
+    },
+    {
+      "id": 43,
+      "title": "Qlib repository README",
+      "organization": "Microsoft",
+      "source_type": "official repository documentation",
+      "url": "https://raw.githubusercontent.com/microsoft/qlib/54355232463878d2eebb91fe0ee5fa7fa1f5976c/README.md",
+      "repository_url": "https://github.com/microsoft/qlib",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Quantitative ML research and backtesting pipeline"
+      ],
+      "limitations": "Example workflows do not prove point-in-time data quality, leakage freedom, or achievable trading results.",
+      "evidence": {
+        "excerpt": "full ML pipeline",
+        "locator": "Qlib introduction"
+      },
+      "previous_moving_url": "https://raw.githubusercontent.com/microsoft/qlib/main/README.md",
+      "repository": "microsoft/qlib",
+      "revision": "54355232463878d2eebb91fe0ee5fa7fa1f5976c",
+      "revision_date": "2026-10-08T10:15:27Z",
+      "documentation_sha256": "e9f7cc8eeb60e3fe3784ec496e350ecb584157c3240cda0651c20acb26fd9037",
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://raw.githubusercontent.com/microsoft/qlib/54355232463878d2eebb91fe0ee5fa7fa1f5976c/README.md",
+        "http_status": 200,
+        "extracted_text_sha256": "e9f7cc8eeb60e3fe3784ec496e350ecb584157c3240cda0651c20acb26fd9037",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "e9f7cc8eeb60e3fe3784ec496e350ecb584157c3240cda0651c20acb26fd9037"
+      }
+    },
+    {
+      "id": 44,
+      "title": "MLforecast repository README",
+      "organization": "Nixtla",
+      "source_type": "official repository documentation",
+      "url": "https://raw.githubusercontent.com/Nixtla/mlforecast/16cabe15f701197491384bd3108d6c6ac1edaff7/README.md",
+      "repository_url": "https://github.com/Nixtla/mlforecast",
+      "accessed_on": "2026-11-10",
+      "supports": [
+        "Time-series machine learning and lag-feature tooling"
+      ],
+      "limitations": "General forecasting tooling, not a financial execution simulator or automatic purged-validation framework.",
+      "evidence": {
+        "excerpt": "Scalable machine learning for time series forecasting",
+        "locator": "README heading"
+      },
+      "previous_moving_url": "https://raw.githubusercontent.com/Nixtla/mlforecast/main/README.md",
+      "repository": "Nixtla/mlforecast",
+      "revision": "16cabe15f701197491384bd3108d6c6ac1edaff7",
+      "revision_date": "2026-11-06T20:06:02Z",
+      "documentation_sha256": "19a07ffbc3b74a2be375d81b66f2ca205dc4aaeb18565d65c83f0fc783f8345a",
+      "primary_source": true,
+      "verification": "Audit re-fetch and exact short-excerpt check against extracted primary text; substantive claim scope reviewed. Not empirical replication.",
+      "audit_verification": {
+        "verified_date": "2026-11-10",
+        "method": "HTTPS primary retrieval; PDF text extraction where applicable",
+        "retrieved_url": "https://raw.githubusercontent.com/Nixtla/mlforecast/16cabe15f701197491384bd3108d6c6ac1edaff7/README.md",
+        "http_status": 200,
+        "extracted_text_sha256": "19a07ffbc3b74a2be375d81b66f2ca205dc4aaeb18565d65c83f0fc783f8345a",
+        "supporting_excerpt_matched": true,
+        "provenance": "live primary-source response",
+        "response_sha256": "19a07ffbc3b74a2be375d81b66f2ca205dc4aaeb18565d65c83f0fc783f8345a"
+      }
+    }
+  ],
+  "original_research_date": "2026-11-09",
+  "audit_date": "2026-11-10",
+  "source_count": 19,
+  "repository_count": 3
+}

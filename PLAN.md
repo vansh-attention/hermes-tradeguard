@@ -1,6 +1,16 @@
 # Hermes TradeGuard — locked initial plan
 
-> Status: scope baseline v0.3, revised 2026-11-09 (IST). User expanded scope from trade-risk review to **cross-market indicators plus risk review** for stocks/ETFs, futures, listed options and prediction markets (Polymarket and Kalshi). This is a plan, not an implemented or security-audited trading system. Further scope changes require an explicit revision; do not silently expand into live trading.
+> Status: scope baseline v0.4, revised 2026-11-09 UTC (local implementation continued into November 10 IST). User authorized internet research and implementation of a **stocks/ETF fundamental + technical recommendation research component**, including mathematical/ML experiments. The v0.3 multi-venue architecture below remains a roadmap, not a claim that those adapters or guards exist. No live orders are added.
+
+## v0.4 implementation slice and evidence boundary
+
+- Build a source-linked library of major strategy families, not an impossible claim to have researched every trading strategy.
+- Implement explainable daily technical metrics, annual company-fundamental ratios, ETF costs/NAV/holdings metrics, evidence-aware heuristic prioritization and explicit abstention. A score is not a probability, validated edge or personalized trading instruction.
+- Add a chronological, purged-label, next-open, cost-aware ridge research baseline and top-of-book microstructure calculators. Do not market daily bars as HFT or an in-sample fit as a deployable model.
+- Register only the read-only stocks/ETF research tools actually implemented. The broader risk-review engine, prediction adapters, futures/options support and mock-order hook below are **not implemented by this slice**.
+- A free, unofficial historical-price provider is optional/off by default and expressly not an entitled executable-price feed. Allow authorized offline snapshots; report source failures rather than fabricate data. SEC public API access was blocked in this environment, so issuer-dated fundamentals examples are a disclosed alternative.
+- README, research source ledgers, tests, real data/CLI exercises and native plugin doctor/validation are acceptance requirements. No catalog submission or installed-profile activation is implied.
+- See `BUILD_STATUS.md` and generated verification artifacts for actual completion, counts and limitations.
 
 ## Goal and pitch
 

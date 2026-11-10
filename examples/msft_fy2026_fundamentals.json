@@ -1,0 +1,28 @@
+{
+  "symbol": "MSFT",
+  "source": "Microsoft issuer FY26 Q4 earnings release, annual GAAP (unaudited), released July 29 2026",
+  "source_url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+  "filed_at": "2026-07-29",
+  "period_start": "2025-07-01",
+  "period_end": "2026-06-30",
+  "period_type": "annual_not_TTM",
+  "currency": "USD",
+  "revenue": 331839000000,
+  "revenue_prev": 281724000000,
+  "net_income": 133749000000,
+  "gross_profit": 225465000000,
+  "operating_income": 155237000000,
+  "operating_cash_flow": 182935000000,
+  "assets": 758376000000,
+  "assets_prev": 619003000000,
+  "equity": 442387000000,
+  "cash": 20935000000,
+  "capex": 115948000000,
+  "total_debt": 40294000000,
+  "warnings": [
+    "filed_at here means issuer public-release date, not independently verified SEC filing timestamp.",
+    "Annual FY26 only; subsequent quarterly results are NOT incorporated.",
+    "Debt = current portion of long-term debt + long-term debt; excludes leases and other non-debt liabilities.",
+    "market_cap and interest_expense unavailable; not estimated from average diluted shares."
+  ]
+}

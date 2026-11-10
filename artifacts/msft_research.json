@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "as_of": "2026-11-10",
+  "symbol": "MSFT",
+  "asset_type": "stock",
+  "currency": "USD",
+  "research_only": true,
+  "model_status": "unvalidated_heuristic",
+  "recommendation": {
+    "action": "WATCHLIST",
+    "score": 69,
+    "evidence_coverage": 0.82,
+    "score_kind": "heuristic_uncalibrated_not_probability",
+    "weights": {
+      "trend_following": 0.4,
+      "value_quality": 0.6
+    },
+    "weight_denominator": 1.0,
+    "strong_recommendation_eligible": false,
+    "validation_status": "heuristic_only_not_performance_validated",
+    "evidence_limitations": [
+      "Incomplete fundamental metric evidence: earnings_yield, fcf_yield, interest_coverage"
+    ],
+    "diagnostic_score": 79.0,
+    "blockers": []
+  },
+  "confidence": {
+    "label": "partial_evidence_coverage",
+    "coverage": 0.82,
+    "meaning": "evidence_coverage_not_win_probability"
+  },
+  "validation_errors": [],
+  "missing_data": [
+    "fundamentals.interest_expense",
+    "fundamentals.market_cap",
+    "fundamentals.earnings_yield",
+    "fundamentals.fcf_yield",
+    "fundamentals.interest_coverage"
+  ],
+  "warnings": [
+    "Unofficial personal-research source, not an entitled executable quote.",
+    "Chart OHLC is provider-reported split-adjusted; dividends NOT included. No total-return claim.",
+    "All candles on retrieval's exchange date excluded, even if that session may have closed.",
+    "Incomplete provider rows skipped: 0. Missing sessions are not filled.",
+    "filed_at here means issuer public-release date, not independently verified SEC filing timestamp.",
+    "Annual FY26 only; subsequent quarterly results are NOT incorporated.",
+    "Debt = current portion of long-term debt + long-term debt; excludes leases and other non-debt liabilities.",
+    "market_cap and interest_expense unavailable; not estimated from average diluted shares.",
+    "Annual-duration reporting period verified: yields are as-reported, not TTM or annualized",
+    "Incomplete fundamental metric evidence: earnings_yield, fcf_yield, interest_coverage"
+  ],
+  "metrics": {
+    "technical": {
+      "sma20": 531.608999633789,
+      "sma50": 517.2788000488281,
+      "sma200": 440.2434991455078,
+      "ema12": 532.6903133400216,
+      "ema26": 527.4652271361272,
+      "macd": 5.225086203894421,
+      "rsi14": 57.45888631455363,
+      "atr14": 15.598036457601964,
+      "vol20": 0.3656047487068499,
+      "max_drawdown": -0.3755646610503861,
+      "return21": 0.01889469641948449,
+      "return63": 0.08211427982307185,
+      "return252": 0.09672095349412135,
+      "momentum12_1": 0.07638302304264366,
+      "dollar_volume20": 13819722126.869202
+    },
+    "fundamental": {
+      "earnings_yield": null,
+      "fcf_yield": null,
+      "roe": 0.30233483352811,
+      "roa": 0.17636238488559763,
+      "revenue_growth": 0.17788686799846665,
+      "operating_margin": 0.4678081840892722,
+      "gross_margin": 0.6794409337058032,
+      "net_debt_to_assets": 0.025526915408715465,
+      "interest_coverage": null,
+      "accrual_ratio": -0.0714197036545497
+    },
+    "fundamentals": {
+      "earnings_yield": null,
+      "fcf_yield": null,
+      "roe": 0.30233483352811,
+      "roa": 0.17636238488559763,
+      "revenue_growth": 0.17788686799846665,
+      "operating_margin": 0.4678081840892722,
+      "gross_margin": 0.6794409337058032,
+      "net_debt_to_assets": 0.025526915408715465,
+      "interest_coverage": null,
+      "accrual_ratio": -0.0714197036545497
+    },
+    "etf": {}
+  },
+  "sources": {
+    "prices": {
+      "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+      "retrieved_at": "2026-11-10T09:09:33.045075+00:00",
+      "data_mode": "historical",
+      "adjustment": "split",
+      "currency": "USD",
+      "interval": "1d"
+    },
+    "fundamentals": {
+      "source": "Microsoft issuer FY26 Q4 earnings release, annual GAAP (unaudited), released July 29 2026",
+      "filed_at": "2026-07-29",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "currency": "USD"
+    }
+  },
+  "coverage": {
+    "technical": {
+      "available": 15,
+      "total": 15,
+      "fraction": 1.0,
+      "status": "complete",
+      "age_days": 1
+    },
+    "fundamentals": {
+      "available": 7,
+      "total": 10,
+      "fraction": 0.7,
+      "status": "partial",
+      "period_basis": "as_reported_not_ttm_not_annualized",
+      "annual_duration_verified": true,
+      "period_start": "2025-07-01",
+      "period_duration_days": 365,
+      "period_end": "2026-06-30",
+      "age_days": 133
+    },
+    "etf": {
+      "status": "not_applicable"
+    }
+  },
+  "strategies": {
+    "trend_following": {
+      "horizon": "technical_swing_weeks_to_months",
+      "score": 100,
+      "max_score": 100,
+      "weight_denominator": 100,
+      "evidence_coverage": 1.0,
+      "checks": [
+        {
+          "criterion": "price_to_sma200",
+          "weight": 25,
+          "value": 1.2383601205558976,
+          "passed": true,
+          "rule": "1.000000001 <= price_to_sma200 <= inf"
+        },
+        {
+          "criterion": "sma50_to_sma200",
+          "weight": 20,
+          "value": 1.1749833922655126,
+          "passed": true,
+          "rule": "1.000000001 <= sma50_to_sma200 <= inf"
+        },
+        {
+          "criterion": "momentum12_1",
+          "weight": 20,
+          "value": 0.07638302304264366,
+          "passed": true,
+          "rule": "1e-12 <= momentum12_1 <= inf"
+        },
+        {
+          "criterion": "return63",
+          "weight": 15,
+          "value": 0.08211427982307185,
+          "passed": true,
+          "rule": "1e-12 <= return63 <= inf"
+        },
+        {
+          "criterion": "vol20",
+          "weight": 10,
+          "value": 0.3656047487068499,
+          "passed": true,
+          "rule": "0 <= vol20 <= 0.4"
+        },
+        {
+          "criterion": "dollar_volume20",
+          "weight": 10,
+          "value": 13819722126.869202,
+          "passed": true,
+          "rule": "1000000 <= dollar_volume20 <= inf"
+        }
+      ],
+      "bullish_reasons": [
+        "Supported: 1.000000001 <= price_to_sma200 <= inf",
+        "Supported: 1.000000001 <= sma50_to_sma200 <= inf",
+        "Supported: 1e-12 <= momentum12_1 <= inf",
+        "Supported: 1e-12 <= return63 <= inf",
+        "Supported: 0 <= vol20 <= 0.4",
+        "Supported: 1000000 <= dollar_volume20 <= inf"
+      ],
+      "bearish_reasons": [],
+      "action": "RESEARCH_CANDIDATE",
+      "hypothesis_only": true
+    },
+    "mean_reversion": {
+      "horizon": "technical_swing_days_to_weeks",
+      "score": 30,
+      "max_score": 60,
+      "weight_denominator": 100,
+      "evidence_coverage": 1.0,
+      "checks": [
+        {
+          "criterion": "rsi14",
+          "weight": 40,
+          "value": 57.45888631455363,
+          "passed": false,
+          "rule": "20 <= rsi14 <= 35"
+        },
+        {
+          "criterion": "price_to_sma20",
+          "weight": 20,
+          "value": 1.0255281476636793,
+          "passed": false,
+          "rule": "0.9 <= price_to_sma20 <= 0.98"
+        },
+        {
+          "criterion": "price_to_sma200",
+          "weight": 20,
+          "value": 1.2383601205558976,
+          "passed": true,
+          "rule": "1 <= price_to_sma200 <= inf"
+        },
+        {
+          "criterion": "vol20",
+          "weight": 10,
+          "value": 0.3656047487068499,
+          "passed": false,
+          "rule": "0 <= vol20 <= 0.35"
+        },
+        {
+          "criterion": "dollar_volume20",
+          "weight": 10,
+          "value": 13819722126.869202,
+          "passed": true,
+          "rule": "1000000 <= dollar_volume20 <= inf"
+        }
+      ],
+      "bullish_reasons": [
+        "Supported: 1 <= price_to_sma200 <= inf",
+        "Supported: 1000000 <= dollar_volume20 <= inf"
+      ],
+      "bearish_reasons": [
+        "Not supported: 20 <= rsi14 <= 35",
+        "Not supported: 0.9 <= price_to_sma20 <= 0.98",
+        "Not supported: 0 <= vol20 <= 0.35"
+      ],
+      "action": "AVOID_OR_WAIT",
+      "hypothesis_only": true
+    },
+    "value_quality": {
+      "horizon": "fundamental_investing_years",
+      "score": 65,
+      "max_score": 100,
+      "weight_denominator": 100,
+      "evidence_coverage": 0.65,
+      "checks": [
+        {
+          "criterion": "earnings_yield",
+          "weight": 15,
+          "value": null,
+          "passed": null,
+          "rule": "0.05 <= earnings_yield <= inf"
+        },
+        {
+          "criterion": "fcf_yield",
+          "weight": 15,
+          "value": null,
+          "passed": null,
+          "rule": "0.04 <= fcf_yield <= inf"
+        },
+        {
+          "criterion": "roe",
+          "weight": 15,
+          "value": 0.30233483352811,
+          "passed": true,
+          "rule": "0.12 <= roe <= inf"
+        },
+        {
+          "criterion": "roa",
+          "weight": 10,
+          "value": 0.17636238488559763,
+          "passed": true,
+          "rule": "0.05 <= roa <= inf"
+        },
+        {
+          "criterion": "revenue_growth",
+          "weight": 10,
+          "value": 0.17788686799846665,
+          "passed": true,
+          "rule": "1e-12 <= revenue_growth <= inf"
+        },
+        {
+          "criterion": "operating_margin",
+          "weight": 10,
+          "value": 0.4678081840892722,
+          "passed": true,
+          "rule": "0.1 <= operating_margin <= inf"
+        },
+        {
+          "criterion": "net_debt_to_assets",
+          "weight": 10,
+          "value": 0.025526915408715465,
+          "passed": true,
+          "rule": "-inf <= net_debt_to_assets <= 0.4"
+        },
+        {
+          "criterion": "interest_coverage",
+          "weight": 5,
+          "value": null,
+          "passed": null,
+          "rule": "3 <= interest_coverage <= inf"
+        },
+        {
+          "criterion": "accrual_ratio",
+          "weight": 10,
+          "value": -0.0714197036545497,
+          "passed": true,
+          "rule": "-inf <= accrual_ratio <= 0.05"
+        }
+      ],
+      "bullish_reasons": [
+        "Supported: 0.12 <= roe <= inf",
+        "Supported: 0.05 <= roa <= inf",
+        "Supported: 1e-12 <= revenue_growth <= inf",
+        "Supported: 0.1 <= operating_margin <= inf",
+        "Supported: -inf <= net_debt_to_assets <= 0.4",
+        "Supported: -inf <= accrual_ratio <= 0.05"
+      ],
+      "bearish_reasons": [
+        "Missing evidence: 0.05 <= earnings_yield <= inf",
+        "Missing evidence: 0.04 <= fcf_yield <= inf",
+        "Missing evidence: 3 <= interest_coverage <= inf",
+        "Incomplete fundamental metric evidence: earnings_yield, fcf_yield, interest_coverage"
+      ],
+      "action": "ABSTAIN",
+      "hypothesis_only": true
+    }
+  }
+}

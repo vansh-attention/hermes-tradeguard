@@ -1,0 +1,788 @@
+{
+  "run_at": "2026-11-10T13:29:40.863135+00:00",
+  "network_explicitly_enabled": true,
+  "tickers": [
+    "MSFT",
+    "AAPL",
+    "SPY"
+  ],
+  "cli_native_metrics_and_scopes_match": true,
+  "comparison_note": "Independent live retrieval timestamps differ; deterministic metrics, cutoffs and decisions compared.",
+  "interactive_actual_stdin": "MSFT followed by quit",
+  "interactive_stdout": "Ticker          Price date    Technical   Combined    Selected scope / verdict\n--------------------------------------------------------------------------------------------------\nMSFT            2026-11-09   1.00        N/A         technical_only / TECHNICAL_RESEARCH_CANDIDATE\n  Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.\n\nScores: 0..1 heuristic support, NOT probabilities of profit. N/A means abstain/unavailable.\nTechnical = price-trend screen only. Combined = fundamentals/ETF structure plus technical evidence.\nTicker-only mode does not auto-fetch fundamentals or silently attach sample files.\nAnalyzed: 1/1 unique tickers. Results are input order, not portfolio rank.\n",
+  "interactive_stderr": "TradeGuard: enter 1..10 tickers, separated by spaces or commas. Type quit to exit.\nTickers> Tickers> ",
+  "cli_result": {
+    "success": true,
+    "requested": [
+      "MSFT",
+      "AAPL",
+      "SPY"
+    ],
+    "symbols": [
+      "MSFT",
+      "AAPL",
+      "SPY"
+    ],
+    "input_count": 3,
+    "count": 3,
+    "succeeded": 3,
+    "failed": 0,
+    "as_of": "2026-11-10",
+    "research_only": true,
+    "model_status": "unvalidated_heuristic",
+    "fundamental_auto_fetch": "not_implemented",
+    "results": [
+      {
+        "symbol": "MSFT",
+        "requested_as": [
+          "MSFT"
+        ],
+        "status": "ok",
+        "asset_type": "stock",
+        "currency": "USD",
+        "as_of": "2026-11-10",
+        "price_as_of": "2026-11-09",
+        "source": {
+          "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+          "retrieved_at": "2026-11-10T13:29:39.804171+00:00",
+          "data_mode": "historical",
+          "adjustment": "split",
+          "currency": "USD",
+          "interval": "1d"
+        },
+        "metadata_status": "not_supplied",
+        "technical_recommendation": {
+          "score": 1.0,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        },
+        "combined_recommendation": {
+          "score": null,
+          "verdict": "ABSTAIN",
+          "conclusion": "No reliable buy-interest score yet: resolve the missing, stale or invalid evidence first.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 0.4,
+          "strong_buy": false,
+          "cautions": [],
+          "scope": "combined"
+        },
+        "technical_metrics": {
+          "sma20": 531.608999633789,
+          "sma50": 517.2788000488281,
+          "sma200": 440.2434991455078,
+          "ema12": 532.6903133400216,
+          "ema26": 527.4652271361272,
+          "macd": 5.225086203894421,
+          "rsi14": 57.45888631455363,
+          "atr14": 15.598036457601964,
+          "vol20": 0.3656047487068499,
+          "max_drawdown": -0.3755646610503861,
+          "return21": 0.01889469641948449,
+          "return63": 0.08211427982307185,
+          "return252": 0.09672095349412135,
+          "momentum12_1": 0.07638302304264366,
+          "dollar_volume20": 13819722126.869202
+        },
+        "fundamental_metrics": {
+          "earnings_yield": null,
+          "fcf_yield": null,
+          "roe": null,
+          "roa": null,
+          "revenue_growth": null,
+          "operating_margin": null,
+          "gross_margin": null,
+          "net_debt_to_assets": null,
+          "interest_coverage": null,
+          "accrual_ratio": null
+        },
+        "etf_metrics": {},
+        "positive_reasons": [
+          "Supported: 1.000000001 <= price_to_sma200 <= inf",
+          "Supported: 1.000000001 <= sma50_to_sma200 <= inf",
+          "Supported: 1e-12 <= momentum12_1 <= inf"
+        ],
+        "missing_data": [
+          "fundamentals.revenue",
+          "fundamentals.revenue_prev",
+          "fundamentals.net_income",
+          "fundamentals.operating_income",
+          "fundamentals.gross_profit",
+          "fundamentals.operating_cash_flow",
+          "fundamentals.capex",
+          "fundamentals.assets",
+          "fundamentals.assets_prev",
+          "fundamentals.equity",
+          "fundamentals.total_debt",
+          "fundamentals.cash",
+          "fundamentals.interest_expense",
+          "fundamentals.market_cap",
+          "fundamentals.earnings_yield",
+          "fundamentals.fcf_yield",
+          "fundamentals.roe",
+          "fundamentals.roa",
+          "fundamentals.revenue_growth",
+          "fundamentals.operating_margin",
+          "fundamentals.gross_margin",
+          "fundamentals.net_debt_to_assets",
+          "fundamentals.interest_coverage",
+          "fundamentals.accrual_ratio"
+        ],
+        "warnings": [
+          "Unofficial personal-research source, not an entitled executable quote.",
+          "Chart OHLC is provider-reported split-adjusted; dividends NOT included. No total-return claim.",
+          "All candles on retrieval's exchange date excluded, even if that session may have closed.",
+          "Incomplete provider rows skipped: 0. Missing sessions are not filled."
+        ],
+        "validation_errors": [],
+        "buy_recommendation": {
+          "score": 1.0,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        }
+      },
+      {
+        "symbol": "AAPL",
+        "requested_as": [
+          "AAPL"
+        ],
+        "status": "ok",
+        "asset_type": "stock",
+        "currency": "USD",
+        "as_of": "2026-11-10",
+        "price_as_of": "2026-11-09",
+        "source": {
+          "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+          "retrieved_at": "2026-11-10T13:29:39.770638+00:00",
+          "data_mode": "historical",
+          "adjustment": "split",
+          "currency": "USD",
+          "interval": "1d"
+        },
+        "metadata_status": "not_supplied",
+        "technical_recommendation": {
+          "score": 1.0,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        },
+        "combined_recommendation": {
+          "score": null,
+          "verdict": "ABSTAIN",
+          "conclusion": "No reliable buy-interest score yet: resolve the missing, stale or invalid evidence first.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 0.4,
+          "strong_buy": false,
+          "cautions": [],
+          "scope": "combined"
+        },
+        "technical_metrics": {
+          "sma20": 343.8705001831055,
+          "sma50": 336.63360107421875,
+          "sma200": 299.3184501647949,
+          "ema12": 344.1507701237605,
+          "ema26": 341.6206926950446,
+          "macd": 2.530077428715856,
+          "rsi14": 57.606696498877504,
+          "atr14": 8.855745304262701,
+          "vol20": 0.2691278696022544,
+          "max_drawdown": -0.3343370956600401,
+          "return21": 0.04173594100998823,
+          "return63": 0.1501426592419337,
+          "return252": 0.29995928651512593,
+          "momentum12_1": 0.24787792696754218,
+          "dollar_volume20": 17137281916.156921
+        },
+        "fundamental_metrics": {
+          "earnings_yield": null,
+          "fcf_yield": null,
+          "roe": null,
+          "roa": null,
+          "revenue_growth": null,
+          "operating_margin": null,
+          "gross_margin": null,
+          "net_debt_to_assets": null,
+          "interest_coverage": null,
+          "accrual_ratio": null
+        },
+        "etf_metrics": {},
+        "positive_reasons": [
+          "Supported: 1.000000001 <= price_to_sma200 <= inf",
+          "Supported: 1.000000001 <= sma50_to_sma200 <= inf",
+          "Supported: 1e-12 <= momentum12_1 <= inf"
+        ],
+        "missing_data": [
+          "fundamentals.revenue",
+          "fundamentals.revenue_prev",
+          "fundamentals.net_income",
+          "fundamentals.operating_income",
+          "fundamentals.gross_profit",
+          "fundamentals.operating_cash_flow",
+          "fundamentals.capex",
+          "fundamentals.assets",
+          "fundamentals.assets_prev",
+          "fundamentals.equity",
+          "fundamentals.total_debt",
+          "fundamentals.cash",
+          "fundamentals.interest_expense",
+          "fundamentals.market_cap",
+          "fundamentals.earnings_yield",
+          "fundamentals.fcf_yield",
+          "fundamentals.roe",
+          "fundamentals.roa",
+          "fundamentals.revenue_growth",
+          "fundamentals.operating_margin",
+          "fundamentals.gross_margin",
+          "fundamentals.net_debt_to_assets",
+          "fundamentals.interest_coverage",
+          "fundamentals.accrual_ratio"
+        ],
+        "warnings": [
+          "Unofficial personal-research source, not an entitled executable quote.",
+          "Chart OHLC is provider-reported split-adjusted; dividends NOT included. No total-return claim.",
+          "All candles on retrieval's exchange date excluded, even if that session may have closed.",
+          "Incomplete provider rows skipped: 0. Missing sessions are not filled."
+        ],
+        "validation_errors": [],
+        "buy_recommendation": {
+          "score": 1.0,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        }
+      },
+      {
+        "symbol": "SPY",
+        "requested_as": [
+          "SPY"
+        ],
+        "status": "ok",
+        "asset_type": "etf",
+        "currency": "USD",
+        "as_of": "2026-11-10",
+        "price_as_of": "2026-11-09",
+        "source": {
+          "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+          "retrieved_at": "2026-11-10T13:29:39.796224+00:00",
+          "data_mode": "historical",
+          "adjustment": "split",
+          "currency": "USD",
+          "interval": "1d"
+        },
+        "metadata_status": "not_supplied",
+        "technical_recommendation": {
+          "score": 0.85,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        },
+        "combined_recommendation": {
+          "score": null,
+          "verdict": "ABSTAIN",
+          "conclusion": "No reliable buy-interest score yet: resolve the missing, stale or invalid evidence first.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 0.4,
+          "strong_buy": false,
+          "cautions": [],
+          "scope": "combined"
+        },
+        "technical_metrics": {
+          "sma20": 762.0929901123047,
+          "sma50": 765.3465954589843,
+          "sma200": 730.6998489379882,
+          "ema12": 754.8537748581807,
+          "ema26": 760.6838795237464,
+          "macd": -5.830104665565727,
+          "rsi14": 45.81270573772669,
+          "atr14": 11.18625581225601,
+          "vol20": 0.2204178952159518,
+          "max_drawdown": -0.25360573583036905,
+          "return21": -0.0332404339229001,
+          "return63": -0.023190919816504785,
+          "return252": 0.12289836819211608,
+          "momentum12_1": 0.16150737742228238,
+          "dollar_volume20": 36843768687.665405
+        },
+        "fundamental_metrics": {},
+        "etf_metrics": {
+          "expense_ratio": null,
+          "nav_premium": null,
+          "holdings_weight_coverage": null,
+          "hhi_observed": null,
+          "top10_weight_observed": null,
+          "hhi": null,
+          "top10_weight": null
+        },
+        "positive_reasons": [
+          "Supported: 1.000000001 <= price_to_sma200 <= inf",
+          "Supported: 1.000000001 <= sma50_to_sma200 <= inf",
+          "Supported: 1e-12 <= momentum12_1 <= inf"
+        ],
+        "missing_data": [
+          "etf.expense_ratio",
+          "etf.nav_premium",
+          "etf.holdings_weight_coverage",
+          "etf.hhi_observed",
+          "etf.top10_weight_observed",
+          "etf.hhi",
+          "etf.top10_weight",
+          "etf.benchmark_returns"
+        ],
+        "warnings": [
+          "Unofficial personal-research source, not an entitled executable quote.",
+          "Chart OHLC is provider-reported split-adjusted; dividends NOT included. No total-return claim.",
+          "All candles on retrieval's exchange date excluded, even if that session may have closed.",
+          "Incomplete provider rows skipped: 0. Missing sessions are not filled."
+        ],
+        "validation_errors": [],
+        "buy_recommendation": {
+          "score": 0.85,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        }
+      }
+    ],
+    "warning": "Technical-only scores are price-trend research screens, not combined valuation recommendations or probabilities. No orders. Results preserve input order, not investment rank."
+  },
+  "native_result": {
+    "success": true,
+    "requested": [
+      "MSFT",
+      "AAPL",
+      "SPY"
+    ],
+    "symbols": [
+      "MSFT",
+      "AAPL",
+      "SPY"
+    ],
+    "input_count": 3,
+    "count": 3,
+    "succeeded": 3,
+    "failed": 0,
+    "as_of": "2026-11-10",
+    "research_only": true,
+    "model_status": "unvalidated_heuristic",
+    "fundamental_auto_fetch": "not_implemented",
+    "results": [
+      {
+        "symbol": "MSFT",
+        "requested_as": [
+          "MSFT"
+        ],
+        "status": "ok",
+        "asset_type": "stock",
+        "currency": "USD",
+        "as_of": "2026-11-10",
+        "price_as_of": "2026-11-09",
+        "source": {
+          "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+          "retrieved_at": "2026-11-10T13:29:40.367636+00:00",
+          "data_mode": "historical",
+          "adjustment": "split",
+          "currency": "USD",
+          "interval": "1d"
+        },
+        "metadata_status": "not_supplied",
+        "technical_recommendation": {
+          "score": 1.0,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        },
+        "combined_recommendation": {
+          "score": null,
+          "verdict": "ABSTAIN",
+          "conclusion": "No reliable buy-interest score yet: resolve the missing, stale or invalid evidence first.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 0.4,
+          "strong_buy": false,
+          "cautions": [],
+          "scope": "combined"
+        },
+        "technical_metrics": {
+          "sma20": 531.608999633789,
+          "sma50": 517.2788000488281,
+          "sma200": 440.2434991455078,
+          "ema12": 532.6903133400216,
+          "ema26": 527.4652271361272,
+          "macd": 5.225086203894421,
+          "rsi14": 57.45888631455363,
+          "atr14": 15.598036457601964,
+          "vol20": 0.3656047487068499,
+          "max_drawdown": -0.3755646610503861,
+          "return21": 0.01889469641948449,
+          "return63": 0.08211427982307185,
+          "return252": 0.09672095349412135,
+          "momentum12_1": 0.07638302304264366,
+          "dollar_volume20": 13819722126.869202
+        },
+        "fundamental_metrics": {
+          "earnings_yield": null,
+          "fcf_yield": null,
+          "roe": null,
+          "roa": null,
+          "revenue_growth": null,
+          "operating_margin": null,
+          "gross_margin": null,
+          "net_debt_to_assets": null,
+          "interest_coverage": null,
+          "accrual_ratio": null
+        },
+        "etf_metrics": {},
+        "positive_reasons": [
+          "Supported: 1.000000001 <= price_to_sma200 <= inf",
+          "Supported: 1.000000001 <= sma50_to_sma200 <= inf",
+          "Supported: 1e-12 <= momentum12_1 <= inf"
+        ],
+        "missing_data": [
+          "fundamentals.revenue",
+          "fundamentals.revenue_prev",
+          "fundamentals.net_income",
+          "fundamentals.operating_income",
+          "fundamentals.gross_profit",
+          "fundamentals.operating_cash_flow",
+          "fundamentals.capex",
+          "fundamentals.assets",
+          "fundamentals.assets_prev",
+          "fundamentals.equity",
+          "fundamentals.total_debt",
+          "fundamentals.cash",
+          "fundamentals.interest_expense",
+          "fundamentals.market_cap",
+          "fundamentals.earnings_yield",
+          "fundamentals.fcf_yield",
+          "fundamentals.roe",
+          "fundamentals.roa",
+          "fundamentals.revenue_growth",
+          "fundamentals.operating_margin",
+          "fundamentals.gross_margin",
+          "fundamentals.net_debt_to_assets",
+          "fundamentals.interest_coverage",
+          "fundamentals.accrual_ratio"
+        ],
+        "warnings": [
+          "Unofficial personal-research source, not an entitled executable quote.",
+          "Chart OHLC is provider-reported split-adjusted; dividends NOT included. No total-return claim.",
+          "All candles on retrieval's exchange date excluded, even if that session may have closed.",
+          "Incomplete provider rows skipped: 0. Missing sessions are not filled."
+        ],
+        "validation_errors": [],
+        "buy_recommendation": {
+          "score": 1.0,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        }
+      },
+      {
+        "symbol": "AAPL",
+        "requested_as": [
+          "AAPL"
+        ],
+        "status": "ok",
+        "asset_type": "stock",
+        "currency": "USD",
+        "as_of": "2026-11-10",
+        "price_as_of": "2026-11-09",
+        "source": {
+          "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+          "retrieved_at": "2026-11-10T13:29:40.353015+00:00",
+          "data_mode": "historical",
+          "adjustment": "split",
+          "currency": "USD",
+          "interval": "1d"
+        },
+        "metadata_status": "not_supplied",
+        "technical_recommendation": {
+          "score": 1.0,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        },
+        "combined_recommendation": {
+          "score": null,
+          "verdict": "ABSTAIN",
+          "conclusion": "No reliable buy-interest score yet: resolve the missing, stale or invalid evidence first.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 0.4,
+          "strong_buy": false,
+          "cautions": [],
+          "scope": "combined"
+        },
+        "technical_metrics": {
+          "sma20": 343.8705001831055,
+          "sma50": 336.63360107421875,
+          "sma200": 299.3184501647949,
+          "ema12": 344.1507701237605,
+          "ema26": 341.6206926950446,
+          "macd": 2.530077428715856,
+          "rsi14": 57.606696498877504,
+          "atr14": 8.855745304262701,
+          "vol20": 0.2691278696022544,
+          "max_drawdown": -0.3343370956600401,
+          "return21": 0.04173594100998823,
+          "return63": 0.1501426592419337,
+          "return252": 0.29995928651512593,
+          "momentum12_1": 0.24787792696754218,
+          "dollar_volume20": 17137281916.156921
+        },
+        "fundamental_metrics": {
+          "earnings_yield": null,
+          "fcf_yield": null,
+          "roe": null,
+          "roa": null,
+          "revenue_growth": null,
+          "operating_margin": null,
+          "gross_margin": null,
+          "net_debt_to_assets": null,
+          "interest_coverage": null,
+          "accrual_ratio": null
+        },
+        "etf_metrics": {},
+        "positive_reasons": [
+          "Supported: 1.000000001 <= price_to_sma200 <= inf",
+          "Supported: 1.000000001 <= sma50_to_sma200 <= inf",
+          "Supported: 1e-12 <= momentum12_1 <= inf"
+        ],
+        "missing_data": [
+          "fundamentals.revenue",
+          "fundamentals.revenue_prev",
+          "fundamentals.net_income",
+          "fundamentals.operating_income",
+          "fundamentals.gross_profit",
+          "fundamentals.operating_cash_flow",
+          "fundamentals.capex",
+          "fundamentals.assets",
+          "fundamentals.assets_prev",
+          "fundamentals.equity",
+          "fundamentals.total_debt",
+          "fundamentals.cash",
+          "fundamentals.interest_expense",
+          "fundamentals.market_cap",
+          "fundamentals.earnings_yield",
+          "fundamentals.fcf_yield",
+          "fundamentals.roe",
+          "fundamentals.roa",
+          "fundamentals.revenue_growth",
+          "fundamentals.operating_margin",
+          "fundamentals.gross_margin",
+          "fundamentals.net_debt_to_assets",
+          "fundamentals.interest_coverage",
+          "fundamentals.accrual_ratio"
+        ],
+        "warnings": [
+          "Unofficial personal-research source, not an entitled executable quote.",
+          "Chart OHLC is provider-reported split-adjusted; dividends NOT included. No total-return claim.",
+          "All candles on retrieval's exchange date excluded, even if that session may have closed.",
+          "Incomplete provider rows skipped: 0. Missing sessions are not filled."
+        ],
+        "validation_errors": [],
+        "buy_recommendation": {
+          "score": 1.0,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        }
+      },
+      {
+        "symbol": "SPY",
+        "requested_as": [
+          "SPY"
+        ],
+        "status": "ok",
+        "asset_type": "etf",
+        "currency": "USD",
+        "as_of": "2026-11-10",
+        "price_as_of": "2026-11-09",
+        "source": {
+          "source": "Yahoo Finance unofficial chart endpoint; historical research only",
+          "retrieved_at": "2026-11-10T13:29:40.323648+00:00",
+          "data_mode": "historical",
+          "adjustment": "split",
+          "currency": "USD",
+          "interval": "1d"
+        },
+        "metadata_status": "not_supplied",
+        "technical_recommendation": {
+          "score": 0.85,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        },
+        "combined_recommendation": {
+          "score": null,
+          "verdict": "ABSTAIN",
+          "conclusion": "No reliable buy-interest score yet: resolve the missing, stale or invalid evidence first.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 0.4,
+          "strong_buy": false,
+          "cautions": [],
+          "scope": "combined"
+        },
+        "technical_metrics": {
+          "sma20": 762.0929901123047,
+          "sma50": 765.3465954589843,
+          "sma200": 730.6998489379882,
+          "ema12": 754.8537748581807,
+          "ema26": 760.6838795237464,
+          "macd": -5.830104665565727,
+          "rsi14": 45.81270573772669,
+          "atr14": 11.18625581225601,
+          "vol20": 0.2204178952159518,
+          "max_drawdown": -0.25360573583036905,
+          "return21": -0.0332404339229001,
+          "return63": -0.023190919816504785,
+          "return252": 0.12289836819211608,
+          "momentum12_1": 0.16150737742228238,
+          "dollar_volume20": 36843768687.665405
+        },
+        "fundamental_metrics": {},
+        "etf_metrics": {
+          "expense_ratio": null,
+          "nav_premium": null,
+          "holdings_weight_coverage": null,
+          "hhi_observed": null,
+          "top10_weight_observed": null,
+          "hhi": null,
+          "top10_weight": null
+        },
+        "positive_reasons": [
+          "Supported: 1.000000001 <= price_to_sma200 <= inf",
+          "Supported: 1.000000001 <= sma50_to_sma200 <= inf",
+          "Supported: 1e-12 <= momentum12_1 <= inf"
+        ],
+        "missing_data": [
+          "etf.expense_ratio",
+          "etf.nav_premium",
+          "etf.holdings_weight_coverage",
+          "etf.hhi_observed",
+          "etf.top10_weight_observed",
+          "etf.hhi",
+          "etf.top10_weight",
+          "etf.benchmark_returns"
+        ],
+        "warnings": [
+          "Unofficial personal-research source, not an entitled executable quote.",
+          "Chart OHLC is provider-reported split-adjusted; dividends NOT included. No total-return claim.",
+          "All candles on retrieval's exchange date excluded, even if that session may have closed.",
+          "Incomplete provider rows skipped: 0. Missing sessions are not filled."
+        ],
+        "validation_errors": [],
+        "buy_recommendation": {
+          "score": 0.85,
+          "verdict": "TECHNICAL_RESEARCH_CANDIDATE",
+          "conclusion": "Price-based trend screen. Favorable research setup worth considering after independent valuation and risk checks; not a validated strong-buy call. Fundamental valuation is not assessed.",
+          "score_type": "uncalibrated_buy_interest_not_profit_probability",
+          "scale": "0 = weakest heuristic support; 1 = strongest; null = abstain",
+          "evidence_coverage": 1.0,
+          "strong_buy": false,
+          "cautions": [
+            "Technical-only screen: fundamental valuation and ETF structure were not assessed."
+          ],
+          "scope": "technical_only",
+          "horizon": "technical_swing_weeks_to_months"
+        }
+      }
+    ],
+    "warning": "Technical-only scores are price-trend research screens, not combined valuation recommendations or probabilities. No orders. Results preserve input order, not investment rank."
+  },
+  "research_only": true,
+  "ok": true
+}

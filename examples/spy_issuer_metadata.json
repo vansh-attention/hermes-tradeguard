@@ -1,0 +1,30 @@
+{
+  "symbol": "SPY",
+  "currency": "USD",
+  "source": "State Street SPY issuer page retrieved Nov 10 2026; top holdings Nov 06, NAV Nov 09",
+  "source_url": "https://www.ssga.com/us/en/individual/etfs/state-street-spdr-sp-500-etf-trust-spy",
+  "as_of": "2026-11-06",
+  "expense_ratio": 0.000945,
+  "nav": 752.68,
+  "nav_date": "2026-11-09",
+  "holdings": [
+    {"symbol": "APPLE INC", "weight": 0.0785},
+    {"symbol": "NVIDIA CORP", "weight": 0.071},
+    {"symbol": "MICROSOFT CORP", "weight": 0.0619},
+    {"symbol": "AMAZON.COM INC", "weight": 0.04},
+    {"symbol": "ALPHABET INC CL A", "weight": 0.0263},
+    {"symbol": "BROADCOM INC", "weight": 0.022},
+    {"symbol": "ALPHABET INC CL C", "weight": 0.0212},
+    {"symbol": "META PLATFORMS INC CLASS A", "weight": 0.0211},
+    {"symbol": "ELI LILLY + CO", "weight": 0.017},
+    {"symbol": "BERKSHIRE HATHAWAY INC CL B", "weight": 0.0167}
+  ],
+  "holdings_complete": false,
+  "holdings_identifiers": "Issuer-reported security names, not exchange-resolved tickers.",
+  "warnings": [
+    "Only 10 largest holdings, not a full portfolio.",
+    "Metadata as_of conservatively uses oldest supplied component: holdings Nov 06. NAV has its own Nov 09 valuation date.",
+    "Gross expense ratio, fractional annual units; .000945 = .0945%.",
+    "Issuer premium/discount uses 4pm bid/ask midpoint vs INAV; close/NAV calculation here is a different statistic."
+  ]
+}
