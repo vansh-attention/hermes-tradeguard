@@ -16,6 +16,16 @@ def _research(args, **kwargs):
     return _json_call(analyze_snapshot, args["snapshot"], as_of=args.get("as_of"))
 
 
+def _derivative_research(args, **kwargs):
+    if set(args) - {"snapshot", "short_leg", "as_of"}:
+        raise ValueError("unknown derivative research arguments")
+    if "short_leg" in args and not isinstance(args["short_leg"], dict):
+        raise ValueError("short_leg must be a normalized option snapshot when supplied")
+    from .tradeguard.derivatives import analyze_derivative_request
+    return _json_call(analyze_derivative_request, args["snapshot"],
+                     short_leg=args.get("short_leg"), as_of=args.get("as_of"))
+
+
 def _validate(args, **kwargs):
     from .tradeguard.validation import walk_forward
     snapshot = args["snapshot"]
@@ -90,6 +100,7 @@ def register(ctx):
             etf_by_symbol=args.get("etf_by_symbol"), as_of=args.get("as_of"))
 
     registrations = [
+        ("tradeguard_derivatives_research", "OFFLINE ONLY: analyze an explicit cash-index future or European cash-settled index option snapshot; optional matched short_leg forms a debit vertical. Computes contract units, expiry payoffs and model-labelled IV/Greeks, never stock valuation on premiums. Fixture/user-supplied provenance cannot become a live entry score. No derivative feeds, credentials, accounts, orders or American/physical options in M1.", {"snapshot": {"type": "object", "description": "Explicit normalized schema_version 1 derivative snapshot: exact contract, quote, underlying completed daily cash-index bars, source and optional dated rates/margin/cost evidence. Money values are exact decimal strings. Never manufacture missing evidence."}, "short_leg": {"type": "object", "description": "Optional exact matching European cash-index short-leg snapshot for a same-expiry one-to-one debit vertical. Not a naked short or atomic executable spread quote."}, "as_of": {"type": "string", "format": "date-time", "description": "Aware ISO research cutoff, e.g. 2026-11-10T08:00:00Z. Current UTC if omitted; offline snapshots are not certified historical-vintage data."}}, ["snapshot"], _derivative_research),
         ("tradeguard_recommend_tickers", "Use when the user supplies just stock/ETF tickers (e.g. MSFT AAPL SPY). One opt-in call fetches up to ten symbols and returns compact 0..1 research screens, source dates and gaps, never raw histories. Default score is explicitly technical-only; combined fundamental/technical recommendations remain unavailable without supplied symbol-bound metadata. Not probabilities or orders.", {"tickers": {"oneOf": [{"type": "string", "maxLength": 512}, {"type": "array", "minItems": 1, "maxItems": 10, "items": {"type": "string"}}]}, "as_of": AS_OF, "fundamentals_by_symbol": {"type": "object", "description": "Optional explicit metadata by exact canonical symbol; each object must carry that same symbol. Not automatically fetched."}, "etf_by_symbol": {"type": "object", "description": "Optional explicit source-labelled ETF metadata by exact canonical symbol."}}, ["tickers"], ticker_recommendations),
         ("tradeguard_strategy_catalog", "Browse source-linked stock/ETF strategy families, metrics, proposed rules, required data and failures. Explicitly distinguishes researched-only, feature-only, heuristic screens and experimental ML; no validated alpha claimed.", {"asset_type": {"type": "string", "enum": ["stock", "etf"]}, "strategy_id": {"type": "string"}}, [], _catalog),
         ("tradeguard_equity_research", "Explainable stock/ETF fundamental and daily technical research; unvalidated heuristic with coverage/abstention, NOT a calibrated buy probability. No order placement.", {"snapshot": SNAPSHOT, "as_of": AS_OF}, ["snapshot"], _research),

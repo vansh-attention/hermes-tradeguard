@@ -32,7 +32,7 @@ def test_plugin_registers_pure_analysis_and_no_order_tools():
     plugin = load_plugin()
     ctx = FakeContext()
     plugin.register(ctx)
-    assert set(ctx.tools) == {"tradeguard_equity_research", "tradeguard_public_history", "tradeguard_walk_forward", "tradeguard_microstructure", "tradeguard_rank", "tradeguard_strategy_catalog", "tradeguard_recommend_tickers"}
+    assert set(ctx.tools) == {"tradeguard_equity_research", "tradeguard_public_history", "tradeguard_walk_forward", "tradeguard_microstructure", "tradeguard_rank", "tradeguard_strategy_catalog", "tradeguard_recommend_tickers", "tradeguard_derivatives_research"}
     response = json.loads(ctx.tools["tradeguard_public_history"]({"symbol": "AAPL"}))
     assert response["success"] is False
     assert response["code"] == "PUBLIC_DATA_DISABLED"

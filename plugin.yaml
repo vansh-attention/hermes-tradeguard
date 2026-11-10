@@ -2,13 +2,14 @@ name: tradeguard
 version: "0.1.0"
 manifest_version: 2
 api_version: 1
-description: "Read-only stocks/ETF fundamental, technical and experimental ML research with evidence-aware abstention."
+description: "Read-only stock/ETF research and offline cash-index futures/European-options analysis; derivative feeds unavailable."
 author: Vansh Khosla
 license: MIT
 homepage: https://github.com/vansh-attention/hermes-tradeguard
 requires_hermes: ">=0.22.7"
-tags: [finance, equities, etf, research]
+tags: [finance, equities, etf, futures, options, research, offline]
 provides_tools:
+  - tradeguard_derivatives_research
   - tradeguard_recommend_tickers
   - tradeguard_strategy_catalog
   - tradeguard_equity_research
