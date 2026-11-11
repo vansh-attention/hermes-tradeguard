@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-10T16:57:24.365452+00:00",
+  "run_at": "2026-11-11T07:21:15.073919+00:00",
   "commands": [
     {
       "command": [
@@ -11,8 +11,9 @@
         "<scratch>"
       ],
       "returncode": 0,
-      "stdout": "........................................................................ [ 21%]\n........................................................................ [ 42%]\n........................................................................ [ 63%]\n........................................................................ [ 84%]\n.....................................................                    [100%]\n341 passed in 1.96s\n",
-      "stderr": ""
+      "stdout": "........................................................................ [  6%]\n........................................................................ [ 12%]\n........................................................................ [ 18%]\n........................................................................ [ 24%]\n........................................................................ [ 30%]\n........................................................................ [ 36%]\n........................................................................ [ 42%]\n........................................................................ [ 48%]\n........................................................................ [ 55%]\n........................................................................ [ 61%]\n........................................................................ [ 67%]\n........................................................................ [ 73%]\n........................................................................ [ 79%]\n........................................................................ [ 85%]\n........................................................................ [ 91%]\n........................................................................ [ 97%]\n........................                                                 [100%]\n1176 passed in 4.66s\n",
+      "stderr": "",
+      "verification_passed": true
     },
     {
       "command": [
@@ -20,8 +21,21 @@
         "scripts/check_research_integrity.py"
       ],
       "returncode": 0,
-      "stdout": "{\n  \"run_at\": \"2026-11-10T16:57:26.597907+00:00\",\n  \"ledgers\": {\n    \"eq\": {\n      \"records\": 28,\n      \"cited_ids\": 28,\n      \"citation_occurrences\": 48,\n      \"errors\": []\n    },\n    \"micro\": {\n      \"records\": 19,\n      \"cited_ids\": 19,\n      \"citation_occurrences\": 61,\n      \"errors\": []\n    }\n  },\n  \"errors\": [],\n  \"mechanical_checks_only\": true,\n  \"license_network_enabled\": false,\n  \"source_records\": 47,\n  \"distinct_source_urls\": 46,\n  \"citation_occurrences\": 109,\n  \"repository_commit_pins\": 9,\n  \"runtime_research_families\": 21,\n  \"ok\": true\n}\n",
-      "stderr": ""
+      "stdout": "{\n  \"run_at\": \"2026-11-11T07:21:19.931729+00:00\",\n  \"ledgers\": {\n    \"eq\": {\n      \"records\": 28,\n      \"cited_ids\": 28,\n      \"citation_occurrences\": 48,\n      \"errors\": []\n    },\n    \"micro\": {\n      \"records\": 19,\n      \"cited_ids\": 19,\n      \"citation_occurrences\": 61,\n      \"errors\": []\n    }\n  },\n  \"errors\": [],\n  \"mechanical_checks_only\": true,\n  \"license_network_enabled\": false,\n  \"source_records\": 47,\n  \"distinct_source_urls\": 46,\n  \"citation_occurrences\": 109,\n  \"repository_commit_pins\": 9,\n  \"runtime_research_families\": 21,\n  \"ok\": true\n}\n",
+      "stderr": "",
+      "verification_passed": true
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "scripts/exercise_derivatives_offline.py",
+        "--output",
+        "artifacts/derivatives_offline_integration.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"data_mode\": \"synthetic_fixture_not_live\",\n  \"case_count\": 5,\n  \"cases\": [\n    {\n      \"name\": \"future\",\n      \"cli_returncode\": 0,\n      \"cli_native_equal\": true,\n      \"success\": true,\n      \"strategy\": \"index_future_directional_research\",\n      \"data_mode\": \"fixture\",\n      \"score\": null,\n      \"performance_validated\": false\n    },\n    {\n      \"name\": \"long_call\",\n      \"cli_returncode\": 0,\n      \"cli_native_equal\": true,\n      \"success\": true,\n      \"strategy\": \"long_call\",\n      \"data_mode\": \"fixture\",\n      \"score\": null,\n      \"performance_validated\": false\n    },\n    {\n      \"name\": \"bull_call_debit\",\n      \"cli_returncode\": 0,\n      \"cli_native_equal\": true,\n      \"success\": true,\n      \"strategy\": \"bull_call_debit\",\n      \"data_mode\": \"fixture\",\n      \"score\": null,\n      \"performance_validated\": false\n    },\n    {\n      \"name\": \"long_put\",\n      \"cli_returncode\": 0,\n      \"cli_native_equal\": true,\n      \"success\": true,\n      \"strategy\": \"long_put\",\n      \"data_mode\": \"fixture\",\n      \"score\": null,\n      \"performance_validated\": false\n    },\n    {\n      \"name\": \"bear_put_debit\",\n      \"cli_returncode\": 0,\n      \"cli_native_equal\": true,\n      \"success\": true,\n      \"strategy\": \"bear_put_debit\",\n      \"data_mode\": \"fixture\",\n      \"score\": null,\n      \"performance_validated\": false\n    }\n  ],\n  \"tool_count\": 8,\n  \"tools\": [\n    \"tradeguard_derivatives_research\",\n    \"tradeguard_equity_research\",\n    \"tradeguard_microstructure\",\n    \"tradeguard_public_history\",\n    \"tradeguard_rank\",\n    \"tradeguard_recommend_tickers\",\n    \"tradeguard_strategy_catalog\",\n    \"tradeguard_walk_forward\"\n  ],\n  \"root_request\": {\n    \"returncode\": 1,\n    \"code\": \"DERIVATIVES_PROVIDER_NOT_IMPLEMENTED\"\n  },\n  \"prompt\": {\n    \"returncode\": 0,\n    \"json_line_count\": 2\n  },\n  \"performance_validated\": false\n}\n",
+      "stderr": "",
+      "verification_passed": true
     },
     {
       "command": [
@@ -32,8 +46,9 @@
         "--ci"
       ],
       "returncode": 0,
-      "stdout": "Plugin Doctor: <home>/Documents/Hackathons/hermes \nhack/hermes-tradeguard\n  manifest: tradeguard 0.1.0 (standalone)\n  OK: runtime discovery, manifest parsing, import, and registration passed\n  registrations: 7 tool(s), 0 hook(s)\n",
-      "stderr": ""
+      "stdout": "Plugin Doctor: <home>/Documents/Hackathons/hermes \nhack/hermes-tradeguard\n  manifest: tradeguard 0.2.0 (standalone)\n  OK: runtime discovery, manifest parsing, import, and registration passed\n  registrations: 8 tool(s), 0 hook(s)\n",
+      "stderr": "",
+      "verification_passed": true
     },
     {
       "command": [
@@ -46,7 +61,8 @@
       ],
       "returncode": 0,
       "stdout": "{\n  \"ok\": true,\n  \"checks\": [\n    {\n      \"name\": \"manifest\",\n      \"ok\": true,\n      \"detail\": \"plugin.yaml parses\"\n    },\n    {\n      \"name\": \"manifest fields\",\n      \"ok\": true,\n      \"detail\": \"name, version, description present\"\n    },\n    {\n      \"name\": \"requires_hermes\",\n      \"ok\": true,\n      \"detail\": \"spec '>=0.22.7' parses\"\n    },\n    {\n      \"name\": \"config schema\",\n      \"ok\": true,\n      \"detail\": \"shape valid\"\n    },\n    {\n      \"name\": \"requires_env\",\n      \"ok\": true,\n      \"detail\": \"all entries UPPER_SNAKE\"\n    },\n    {\n      \"name\": \"oauth\",\n      \"ok\": true,\n      \"detail\": \"not declared\"\n    },\n    {\n      \"name\": \"loadable\",\n      \"ok\": true,\n      \"detail\": \"entry: __init__.py\"\n    },\n    {\n      \"name\": \"python dependencies\",\n      \"ok\": true,\n      \"detail\": \"none declared\"\n    },\n    {\n      \"name\": \"capability probe\",\n      \"ok\": true,\n      \"detail\": \"register() ran in isolation\"\n    },\n    {\n      \"name\": \"declared tools\",\n      \"ok\": true,\n      \"detail\": \"matches registrations\"\n    },\n    {\n      \"name\": \"declared hooks\",\n      \"ok\": true,\n      \"detail\": \"matches registrations\"\n    },\n    {\n      \"name\": \"declared middleware\",\n      \"ok\": true,\n      \"detail\": \"matches registrations\"\n    },\n    {\n      \"name\": \"built-in tool collisions\",\n      \"ok\": true,\n      \"detail\": \"no collisions\"\n    },\n    {\n      \"name\": \"security scan\",\n      \"ok\": true,\n      \"detail\": \"safe\"\n    },\n    {\n      \"name\": \"no core override\",\n      \"ok\": true,\n      \"detail\": \"no runtime rebinds of Hermes core\"\n    }\n  ],\n  \"warnings\": [],\n  \"isolation\": {\n    \"verdict\": \"host\",\n    \"host_ready\": true,\n    \"reasons\": [],\n    \"notes\": [],\n    \"ctx_methods\": [\n      \"register_tool\"\n    ]\n  }\n}\n",
-      "stderr": "  \u2192 Resolving Python dependencies\u2026\n  \u2713 Resolving Python dependencies\n  \u2192 Installing Python dependencies\u2026\n  \u2713 Installing Python dependencies\n"
+      "stderr": "  \u2192 Resolving Python dependencies\u2026\n  \u2713 Resolving Python dependencies\n  \u2192 Installing Python dependencies\u2026\n  \u2713 Installing Python dependencies\n",
+      "verification_passed": true
     },
     {
       "command": [
@@ -56,7 +72,8 @@
       ],
       "returncode": 0,
       "stdout": "",
-      "stderr": ""
+      "stderr": "",
+      "verification_passed": true
     }
   ],
   "ok": true,

@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "data_mode": "synthetic_fixture_not_live",
+  "case_count": 5,
+  "cases": [
+    {
+      "name": "future",
+      "cli_returncode": 0,
+      "cli_native_equal": true,
+      "success": true,
+      "strategy": "index_future_directional_research",
+      "data_mode": "fixture",
+      "score": null,
+      "performance_validated": false
+    },
+    {
+      "name": "long_call",
+      "cli_returncode": 0,
+      "cli_native_equal": true,
+      "success": true,
+      "strategy": "long_call",
+      "data_mode": "fixture",
+      "score": null,
+      "performance_validated": false
+    },
+    {
+      "name": "bull_call_debit",
+      "cli_returncode": 0,
+      "cli_native_equal": true,
+      "success": true,
+      "strategy": "bull_call_debit",
+      "data_mode": "fixture",
+      "score": null,
+      "performance_validated": false
+    },
+    {
+      "name": "long_put",
+      "cli_returncode": 0,
+      "cli_native_equal": true,
+      "success": true,
+      "strategy": "long_put",
+      "data_mode": "fixture",
+      "score": null,
+      "performance_validated": false
+    },
+    {
+      "name": "bear_put_debit",
+      "cli_returncode": 0,
+      "cli_native_equal": true,
+      "success": true,
+      "strategy": "bear_put_debit",
+      "data_mode": "fixture",
+      "score": null,
+      "performance_validated": false
+    }
+  ],
+  "tool_count": 8,
+  "tools": [
+    "tradeguard_derivatives_research",
+    "tradeguard_equity_research",
+    "tradeguard_microstructure",
+    "tradeguard_public_history",
+    "tradeguard_rank",
+    "tradeguard_recommend_tickers",
+    "tradeguard_strategy_catalog",
+    "tradeguard_walk_forward"
+  ],
+  "root_request": {
+    "returncode": 1,
+    "code": "DERIVATIVES_PROVIDER_NOT_IMPLEMENTED"
+  },
+  "prompt": {
+    "returncode": 0,
+    "json_line_count": 2
+  },
+  "performance_validated": false
+}

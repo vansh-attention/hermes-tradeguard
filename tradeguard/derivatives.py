@@ -63,6 +63,8 @@ def _report(snapshot, cutoff):
     report = {"schema_version": 1, "success": True, "research_only": True,
               "model_status": "unvalidated_heuristic", "performance_validated": False,
               "policy_version": POLICY_VERSION, "data_mode": source["data_mode"],
+              "provenance": {"ingress": "user_supplied_snapshot", "data_mode_is_caller_declared": True,
+                             "independently_verified": False, "trusted_live_source": False},
               "contract": copied["contract"], "as_of": cutoff.isoformat(), "source": source,
               "source_clocks": {"quote_observed_at": copied["quote"]["observed_at"],
                                 "quote_received_at": copied["quote"]["received_at"],
@@ -75,6 +77,8 @@ def _report(snapshot, cutoff):
                   "Direction and liquidity observations are not probabilities or performance validation."])),
               "blockers": blockers, "evidence_coverage": {}}
     usable = validation.get("usable", {})
+    report["metrics"]["technical_observation_status"] = (
+        "usable_for_direction" if usable.get("history") else "descriptive_only_unusable_history")
     present = {"underlying_history": bool(usable.get("history")),
                "quote_evidence": bool(usable.get("quote")),
                "cost_estimate": bool(usable.get("costs")),
@@ -90,7 +94,8 @@ def _recommendation(report, snapshot, *, side, scope):
     from .derivative_contracts import decimal_value
     from .derivative_policy import directional_support, research_interest
     metrics = report["metrics"]["technical"]
-    direction = directional_support(metrics, side)
+    direction = (directional_support(metrics, side)
+                 if report["evidence_coverage"]["checks"]["underlying_history"] else None)
     bid, ask = (decimal_value(snapshot["quote"][k]) for k in ("bid", "ask"))
     spread = float((ask-bid)/((ask+bid)/2))
     view = research_interest(direction, spread, blockers=report["blockers"])
@@ -155,7 +160,10 @@ def _option_pricing(snapshot, usable, cutoff):
                    "greeks_per_premium_unit": None, "greeks_per_contract": None,
                    "midpoint_is_execution": False, "reason_codes": []}
     if not usable.get("rates"):
-        unavailable["reason_codes"] = ["DATED_MATCHING_RATES_UNAVAILABLE"]
+        unavailable["reason_codes"].append("DATED_MATCHING_RATES_UNAVAILABLE")
+    if not usable.get("quote"):
+        unavailable["reason_codes"].append("DATED_MATCHING_QUOTE_UNAVAILABLE")
+    if unavailable["reason_codes"]:
         return unavailable
     c, q, u, rates = (snapshot[key] for key in ("contract", "quote", "underlying", "rates"))
     years = (aware_time(c["expiry_at"]) - cutoff).total_seconds() / (365 * 24 * 60 * 60)
@@ -262,6 +270,14 @@ def analyze_debit_vertical(long_snapshot, short_snapshot, *, as_of=None):
             return _error("spread requires distinct IDs, same expiry and multiplier", code="MISMATCHED_SPREAD_LEGS")
         if decimal_value(long["underlying"]["spot"]) != decimal_value(short["underlying"]["spot"]):
             return _error("spread requires a coherent common underlying spot", code="MISMATCHED_SPREAD_EVIDENCE")
+        # One directional series must describe both legs. Equal current spot/ID
+        # alone cannot reconcile conflicting histories or source attestations.
+        history_fields = ("underlying_id", "currency", "interval", "price_basis", "adjustment", "source", "bars")
+        if (any(long["underlying"][field] != short["underlying"][field] for field in history_fields)
+                or aware_time(long["underlying"]["last_bar_finalized_at"])
+                != aware_time(short["underlying"]["last_bar_finalized_at"])):
+            return _error("spread requires matching underlying history, basis and finalization evidence",
+                          code="MISMATCHED_SPREAD_EVIDENCE")
         with localcontext(_REPORT_CONTEXT):
             lr, long, lu = _report(long, cutoff)
             sr, short, su = _report(short, cutoff)
@@ -290,13 +306,20 @@ def analyze_debit_vertical(long_snapshot, short_snapshot, *, as_of=None):
                            + (decimal_value(short["quote"]["ask"])-decimal_value(short["quote"]["bid"]))) * multiplier
             liquidation = (decimal_value(long["quote"]["bid"])-decimal_value(short["quote"]["ask"]))*multiplier
             strategy = "bull_call_debit" if right == "call" else "bear_put_debit"
-            direction = directional_support(lr["metrics"]["technical"], "long" if right == "call" else "short")
+            # A single declared fixture does not make an otherwise imported
+            # spread wholly synthetic. Preserve each leg's declared mode.
+            mode = "fixture" if lr["data_mode"] == sr["data_mode"] == "fixture" else "user_supplied"
+            direction = (directional_support(lr["metrics"]["technical"], "long" if right == "call" else "short")
+                         if lu.get("history") and su.get("history") else None)
             interest = research_interest(direction, float(spread_cost/bounds["debit"]), blockers=blockers)
             report = {**lr, "strategy": strategy, "blockers": list(dict.fromkeys(blockers)),
                       "atomic_fill_guaranteed": False,
-                      "data_mode": "fixture" if "fixture" in (lr["data_mode"], sr["data_mode"]) else "user_supplied",
+                      "data_mode": mode,
+                      "provenance": {**lr["provenance"],
+                                     "mixed_declared_modes": lr["data_mode"] != sr["data_mode"],
+                                     "legs": {"long": lr["provenance"], "short": sr["provenance"]}},
                       "contract": {key: value for key, value in lc.items() if key not in ("contract_id", "strike")},
-                      "source": {"data_mode": "fixture" if "fixture" in (lr["data_mode"], sr["data_mode"]) else "user_supplied",
+                      "source": {"data_mode": mode,
                                  "entitlement": "unverified", "legs": {"long": lr["source"], "short": sr["source"]}},
                       "source_clocks": {"long": lr["source_clocks"], "short": sr["source_clocks"]},
                       "legs": [{"role": role, "contract_id": item["contract"]["contract_id"],
@@ -335,3 +358,39 @@ def analyze_derivative_request(snapshot, *, short_leg=None, as_of=None):
     if not isinstance(short_leg, dict):
         return _error("short_leg must be a normalized option snapshot")
     return analyze_debit_vertical(snapshot, short_leg, as_of=as_of)
+
+
+def recommend_derivatives(requests, *, kind, provider, supplemental_by_root=None, as_of=None):
+    """Orchestrate caller-injected offline data; no built-in live feed is added.
+
+    The provider is a Python data interface, never a model-supplied URL or
+    credential argument. This library-only path preserves unverified provenance
+    and abstention. CLI/native root requests remain unavailable in M1.
+    """
+    from .derivative_batches import recommend_derivatives as execute
+    return execute(requests, kind=kind, provider=provider,
+                   supplemental_by_root=supplemental_by_root, as_of=as_of)
+
+
+def derivative_roots_unavailable(requests, *, kind="options", as_of=None):
+    """Validate a root request and truthfully decline unimplemented live access.
+
+    This unavailable CLI path constructs no provider, reads no credentials and
+    makes no market request. A separate library API can orchestrate explicitly
+    injected offline data; it does not enable root-only live access here.
+    """
+    from .derivative_contracts import parse_root_requests
+    try:
+        parsed = parse_root_requests(requests)
+        if not isinstance(kind, str) or kind not in ("futures", "options"):
+            raise ValueError("kind must be futures or options")
+        cutoff = _cutoff(as_of)
+        result = _error("M1 is offline only. Supply --snapshot; derivative root feeds require separately authorized M2 integration.",
+                        code="DERIVATIVES_PROVIDER_NOT_IMPLEMENTED")
+        result.update({**parsed, "kind": kind, "as_of": cutoff.isoformat(),
+                       "requested_count": len(parsed["requested"]), "unique_count": len(parsed["roots"]),
+                       "analyzed_count": 0, "eligible_count": 0, "abstained_count": 0,
+                       "failed_count": len(parsed["roots"]), "provider_attempted": False})
+        return result
+    except (ValueError, TypeError, KeyError, ArithmeticError) as exc:
+        return _error(exc, code="INVALID_DERIVATIVE_ARGUMENTS")

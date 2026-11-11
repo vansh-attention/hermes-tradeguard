@@ -1,5 +1,5 @@
 name: tradeguard
-version: "0.1.0"
+version: "0.2.0"
 manifest_version: 2
 api_version: 1
 description: "Read-only stock/ETF research and offline cash-index futures/European-options analysis; derivative feeds unavailable."

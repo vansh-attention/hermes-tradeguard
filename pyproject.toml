@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hermes-tradeguard"
-version = "0.1.0"
-description = "Read-only evidence-aware stock and ETF research for Hermes"
+version = "0.2.0"
+description = "Read-only equity/ETF research and offline index futures/European-options analysis for Hermes"
 requires-python = ">=3.11"
 dependencies = []
 

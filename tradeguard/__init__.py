@@ -1,3 +1,3 @@
-"""TradeGuard read-only equity research components."""
+"""TradeGuard read-only equity research and offline index-derivative analysis."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

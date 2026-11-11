@@ -1,8 +1,10 @@
-# TradeGuard — Hermes equity/ETF research plugin
+# TradeGuard — Hermes equity/ETF and offline derivatives research
 
-A **read-only stocks/ETF research plugin for Hermes Agent**. It separates company fundamentals, daily technical observations, ETF structure and experimental ML evaluation. It does not place orders and does not call a 0–100 heuristic a win probability.
+A **read-only research plugin for Hermes Agent**. It separates stock/ETF fundamentals, daily technical observations and experimental ML from a contract-aware **offline cash-index futures/European-options engine**. It does not place orders or call a research score a win probability.
 
-> This is a research prototype, not a proven alpha service or a universal trading firewall. The broader multi-venue roadmap remains in `PLAN.md`; prediction-market/futures/options adapters and a blocking hook are not part of this implementation.
+> This is a research prototype, not a proven alpha service or a universal trading firewall. The broader multi-venue roadmap remains in `PLAN.md`. Offline derivative mathematics is implemented; live derivative/prediction-market adapters, account access and a blocking hook are not.
+
+**Distribution boundary:** the 0.2.0 derivatives work is local to `feat/derivatives-research` until the owner separately authorizes publication. The GitHub/default-branch install below still installs the last published version; it does not automatically include unpushed local changes.
 
 ## Install in Hermes
 
@@ -22,7 +24,7 @@ Start a **new Hermes chat** after enabling, and follow a restart instruction if 
 
 > Use TradeGuard for MSFT AAPL SPY. Show the 0–1 technical scores, source dates and missing fundamental data; do not treat technical-only scores as combined valuations.
 
-For an immutable installation, add `--ref` followed by the repository's full tested 40-character commit SHA to the install command. No trading keys or broker login are needed. This plugin has seven model-callable tools, zero hooks and zero third-party runtime Python dependencies; loading it does not fetch data or enable networking.
+For an immutable installation, add `--ref` followed by the repository's full tested 40-character commit SHA to the install command. No trading keys or broker login are needed. This feature branch has eight model-callable tools, zero hooks and zero third-party runtime Python dependencies; loading it does not fetch data or enable networking. Seven tools were present in the previously published version.
 
 To run the standalone CLI instead:
 
@@ -55,6 +57,47 @@ Original papers and reputable code inform the design; they do **not** validate t
 | Ranking | At most 50 explicitly supplied comparable snapshots | Same instrument family/currency/end date; no implicit whole-market universe |
 | ML experiment | Chronological, label-purged expanding-window ridge baseline with next-open simulation and costs | Technical features only; no fundamental ML without historical point-in-time fundamentals; no model-selection/production-readiness claim |
 | Microstructure | Spread, queue imbalance, weighted midpoint, event OFI | Needs supplied quotes/events; no HFT execution, queue/fill simulator or calibrated microprice |
+| Offline derivatives M1 | Exact index-future cash P&L; European cash-index option IV/Greeks and expiry payoff; matched debit verticals | Explicit snapshots, source/model/expiry/unit gates, no live chain, broker access, account sizing or validated entry signal |
+
+## Futures and options — offline M1
+
+Run these from this feature checkout, not an older clone of published `main`:
+
+```bash
+# Futures observations and cash scenarios; the file is intentionally synthetic.
+python3 -m tradeguard derivatives --snapshot examples/derivatives_synthetic.json \
+  --as-of 2026-11-10T08:00:00Z
+
+# European call premium/expiry risk, optional model IV and Greeks.
+python3 -m tradeguard derivatives --snapshot examples/derivatives_synthetic_call.json \
+  --as-of 2026-11-10T08:00:00Z --json
+
+# Same-expiry one-to-one bull-call debit vertical.
+python3 -m tradeguard derivatives --snapshot examples/derivatives_synthetic_call.json \
+  --short-leg examples/derivatives_synthetic_call_short.json \
+  --as-of 2026-11-10T08:00:00Z
+
+# Actual CLI/native-handler/prompt exercise, entirely offline.
+python3 scripts/exercise_derivatives_offline.py \
+  --output artifacts/derivatives_offline_integration.json
+```
+
+The five example files cover a future, long call/put and both debit-vertical directions. They are invented `TEST` instruments, not market quotes/listings or trading results. The fixed cutoff keeps the demonstration reproducible; omitting it uses current UTC and can add stale/expired-evidence blockers.
+
+**All final M1 derivative interest scores are `null`/`ABSTAIN`.** Descriptive underlier directional support may be numeric but is not a live entry recommendation. Every public snapshot is imported/unverified; a `fixture` label is explicitly **caller-declared synthetic**, not an independent certification of origin. Mixed fixture/imported spread legs are not labelled wholly synthetic. Missing rates/costs/margins stay unavailable rather than becoming zero or a higher score.
+
+Root syntax is reserved, not a working live feed:
+
+```bash
+python3 -m tradeguard derivatives NFO:NIFTY --kind options --json
+# Exit 1: DERIVATIVES_PROVIDER_NOT_IMPLEMENTED; no credential/network call.
+```
+
+`--interactive` accepts root lines but honestly reports the same unavailable M2 status. `--allow-derivatives-data` cannot enable a nonexistent adapter. The internal Python `recommend_derivatives(..., provider=...)` API orchestrates explicitly injected offline data with bounded selection, refreshed spot/quotes and partial failures; it is not exposed as a live provider selector in CLI/native tools.
+
+Supported analytical scope: linear cash-index futures; standard European cash-settled options on a cash index; same-expiry, equal-multiplier bull-call/bear-put debit verticals. American/physical/adjusted contracts, options on futures, naked/credit/calendar/ratio strategies and inverse/perpetual products are unsupported. Margin is not maximum loss; two leg estimates do not guarantee an atomic spread fill.
+
+See `docs/derivatives.md` for fields, units, evidence gates and handoff; `docs/research/derivatives_strategy_library.md` and `sources_derivatives.json` for source/status boundaries; `docs/research/derivatives_validation_protocol.md` for the unimplemented M3 evaluation gate. Neither the derivative fixtures nor the older equity ridge results validate derivative profitability.
 
 ## Run locally
 
@@ -126,6 +169,7 @@ The final block includes a plain-English conclusion, evidence coverage and remai
 - `tradeguard_rank(snapshots, as_of?)`
 - `tradeguard_strategy_catalog(asset_type?, strategy_id?)`
 - `tradeguard_recommend_tickers(tickers, as_of?, fundamentals_by_symbol?, etf_by_symbol?)` — opt-in network; up to ten explicit tickers, compact scoped output
+- `tradeguard_derivatives_research(snapshot, short_leg?, as_of?)` — **offline only**; exact supported cash-index derivative snapshots, optional matched debit-vertical leg, model-labelled calculations and source-gated abstention
 
 Validate a local checkout:
 
@@ -155,7 +199,7 @@ SEC companyfacts normalization exists as a library function for standard USD US-
 ## Security / network / privacy disclosure
 
 - **No orders, accounts, keys, wallet signing, secret reads, telemetry, background jobs, shell children, core overrides or self-updater.** No hooks are registered.
-- Native snapshot analysis/ranking/ML/book/catalog tools have no network or filesystem reads. The public-history tool makes one opt-in HTTPS request to `query1.finance.yahoo.com` with the requested ticker. The ticker-only tool makes one such request per unique supplied symbol, at most ten tokens and three joined concurrent workers; it does not start persistent jobs, read example files or discover an implicit universe.
+- Native snapshot analysis/derivatives/ranking/ML/book/catalog tools have no network or explicit filesystem reads. The public-history tool makes one opt-in HTTPS request to `query1.finance.yahoo.com` with the requested ticker. The ticker-only tool makes one such request per unique supplied symbol, at most ten tokens and three joined concurrent workers; it does not start persistent jobs, read example files or discover an implicit universe.
 - Explicit library use of `fetch_sec_fundamentals` makes an HTTPS request to `data.sec.gov` with a supplied exact ten-digit CIK; resolve issuer identity separately first. It is not called automatically by analysis.
 - Hostnames are fixed/allowlisted; redirects outside allowed HTTPS hosts are refused; responses have size/time limits. TLS peer/hostname verification stays enabled. On macOS the provider also loads the public `/etc/ssl/cert.pem` OS CA bundle to support Python interpreters missing their own bundle.
 - Yahoo's chart endpoint is unofficial and unentitled: access can break or be restricted. Free access does **not** grant commercial use, redistribution or real-time trading rights. Choose a licensed data source before deployment. Raw vendor histories are not bundled or committed.

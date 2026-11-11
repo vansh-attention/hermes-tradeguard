@@ -57,3 +57,10 @@ Started 2026-11-09 IST. User authorized internet research and implementation of 
 - Added Git-based Hermes installation instructions, opt-in data configuration and fresh-chat usage; added an offline Python 3.11–3.13 CI matrix with immutable official action pins.
 - Verification logs redact absolute local checkout/home/scratch paths without changing measured exit codes or metrics. Raw vendor histories, private outputs, credentials, caches and generated build directories remain excluded.
 - Final local pre-publication suite: 341 tests passed; Hermes doctor and full `validate --install-deps` passed with seven tools, zero hooks and no warnings. Catalog submission and active-profile installation are separate and were not requested.
+
+## Offline derivatives M1 — November 11, 2026
+
+- Local feature branch `feat/derivatives-research` extends the native plugin to version 0.2.0 with an eighth, offline-only derivatives tool. Existing stock/ETF tools remain compatible; no live derivatives adapter, accounts, credentials or trades were added.
+- Implemented exact contract/evidence gates, futures cash scenarios, European cash-index option IV/Greeks and payoff bounds, coherent matched debit verticals, root metadata selection, injected offline-data batches and auditable CLI output. Fixture labels are caller declarations; final M1 scores always abstain.
+- Parent verification: **1,176 tests passed**; actual CLI/native equality on five synthetic cases; doctor eight tools/zero hooks; full validator including dependency preparation passed with zero warnings; source/whitespace checks passed. Saved real outcome evidence in `artifacts/verification_run.json` and `artifacts/derivatives_offline_integration.json`.
+- Full details and remaining M2/M3 gates: `docs/DERIVATIVES_M1_REPORT.md`, `docs/DERIVATIVES_M1_STATUS.md` and `docs/derivatives.md`. No remote push, catalog submission or active-profile activation is claimed for this continuation.

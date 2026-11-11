@@ -40,10 +40,42 @@ Canonical shape follows the plan. Additional precise field names:
 - [x] Explicit user approval and bounded scope.
 - [x] Original 341-test baseline and clean-tree/HEAD check.
 - [x] Feature branch created without changing the published main branch.
-- [ ] Pure contract, arithmetic and indicator/policy streams verified.
-- [ ] Offline futures/options/vertical reports and adversarial gates verified.
-- [ ] CLI/native parity and no-network behavior exercised.
-- [ ] Documentation/examples and official Hermes validation refreshed.
-- [ ] Independent review findings resolved; exact final test/commit status recorded.
+- [x] Pure contract, arithmetic and indicator/policy streams verified.
+- [x] Offline futures/options/vertical reports and core adversarial gates verified.
+- [x] CLI/native parity and no-network behavior exercised on the shipped synthetic cases.
+- [x] Documentation/examples and official Hermes validation refreshed.
+- [x] Independent review findings resolved; final measured test status recorded below; local commit is recorded in Git history.
 
-This is progress state, not a claim that unfinished steps or live derivatives support work.
+## Historical parent integration checkpoint (before November 11 continuation)
+
+- Genuine RED observed for missing `tradeguard.derivatives`, missing derivative renderer and absent native registration before adding their code.
+- Offline renderer tests: `python3 -m pytest -q tests/test_derivative_cli.py --basetemp <scratch>/tradeguard-m1-ui-green`: **2 passed**.
+- Inert registration + existing plugin tests: `python3 -m pytest -q tests/test_derivative_plugin.py::test_derivative_tool_registers_inertly_without_live_surface tests/test_plugin.py --basetemp <scratch>/tradeguard-m1-native-registration-green`: **5 passed**.
+- Native registration now declares eight tools in the working branch, but actual derivative handler/calculation integration is **not yet verified**. The offline core streams are running in parallel. No completion or live-support claim follows from registration.
+- Parent has prepared futures report and integration tests; option/vertical reporting and CLI integration remain pending dependent core results. No provider module, credentials or network capability has been introduced.
+- First local checkpoint commit: `5810f15` (authorized boundary/status document only). No push.
+
+## November 11 continuation / review fixes
+
+- Preserved the existing feature branch and all uncommitted changes instead of restarting from published main. Initial continuation run found seven failures/833 passes; after the selection and developer-exercise fixes, parent verification returned **840 passed in 3.00s**.
+- Selection now excludes the wrong contract family before option strike access, rejects eligible mixed currency/underlying ambiguity, and preserves exact single-reason exclusion counts. The unchanged selection test file passed **49 tests**.
+- Added `scripts/exercise_derivatives_offline.py`: actual CLI/registered-handler equality for five synthetic future/option/debit-spread cases, eight-tool registration, unavailable root status and two-line prompt behavior. No market data, accounts or secrets are accessed.
+- Review regressions first reproduced contradictory spread histories and mixed-source mislabelling. The engine now requires a coherent common underlier history/source/finalization, preserves equivalent timezone instants and reports mixed declared-source legs as user-supplied.
+- Provenance correction deliberately preserves `fixture` only as a caller-declared classification, never verification: all public results explicitly carry user-supplied snapshot ingress, no independent verification and no trusted live source. Human rendering must say caller-declared synthetic/unverified; imported JSON cannot assert trust. This avoids falsely certifying arbitrary payloads while retaining honest fixture declarations.
+- Additional RED/GREEN regressions prevent stale/unusable history from exposing a current numeric directional view, and prevent stale/unknown/closed quote evidence from yielding available current IV/Greeks. Gross descriptive payoff calculations remain visible.
+- Parent review/docs/verifier targeted checkpoint: **48 tests passed in 0.47s**. This is not the final full-suite total.
+- Added the derivative source/status library and unimplemented point-in-time M3 protocol, with prior-inspection dates and direct/indexed provenance kept distinct. Package/manifest/runtime metadata are aligned at 0.2.0; no release tag/publication is implied.
+- Doctor passed with **eight tools, zero hooks**. One early full validation reported `dependency preparation failed: Dependency inputs changed while preparing publication; retry.` despite exit zero and ok JSON. That run is **not accepted as a successful full admission gate**. Final validation must be rerun after all writers finish.
+- Hardened the verification runner against that observed false-positive: preserve actual stdout/stderr/returncode, separately fail dependency-preparation diagnostics, incomplete/failed structured checks or warnings. Added genuine failing regressions before implementing the gate.
+- Completed injected offline batch orchestration and detailed payoff rendering. Parent inspected the implementations and reran the frozen-tree gates; no worker success claim was substituted for parent verification.
+
+## Final M1 verification — November 11, 2026
+
+- `python3 scripts/verify_project.py --scratch <scratch>/tradeguard-m1-final-verification` completed with exit 0. Actual full suite: **1,176 passed in 4.66s**. All six recorded commands succeeded and were independently accepted by the stricter verification verdict.
+- The actual developer exercise passed five synthetic CLI/native cases (future, long call/put, both debit verticals), eight-tool registration, unavailable root requests and two-line prompt behavior. All final scores remained null, and no raw history was copied into its case summaries.
+- Official doctor: **eight tools, zero hooks**. Full `validate --install-deps --json`: dependency preparation completed, all structured checks passed, zero warnings. The earlier changed-input run was not counted as a pass.
+- Parent also exercised the public Python batch API: three tokens/two unique roots, one analyzed root and one isolated failure, exact contract counts, quote-last call order and zero eligible roots. Its provider was explicitly synthetic/in-memory, not a real market feed.
+- Human option/vertical commands displayed the required strike/right/multiplier/premium/debit/breakeven and leg clocks. `docs/DERIVATIVES_M1_REPORT.md` and the two derived verification artifacts are the handoff.
+- M1 source, tests, examples and documentation are ready for the local checkpoint. M2/M3, active-profile installation, remote push and catalog submission remain unimplemented/unperformed; no trading credentials or accounts were accessed.
+
+M1 is analytical implementation evidence only. It is not proof of live derivatives access or recommendation performance.

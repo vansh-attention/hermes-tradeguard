@@ -35,6 +35,8 @@ jobs:
         run: python -m pytest -q
       - name: Check research references
         run: python scripts/check_research_integrity.py
+      - name: Exercise offline derivative CLI and native parity
+        run: python scripts/exercise_derivatives_offline.py --output artifacts/derivatives_offline_integration.json
       - name: Exercise CLI discovery without networking
         run: |
           python -m tradeguard --help

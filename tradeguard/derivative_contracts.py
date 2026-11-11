@@ -33,6 +33,7 @@ import re
 
 INVALID = "INVALID_DERIVATIVE_SNAPSHOT"
 UNSUPPORTED = "UNSUPPORTED_INSTRUMENT"
+AMBIGUOUS = "AMBIGUOUS_CONTRACT_SELECTION"
 _DECIMAL = re.compile(r"[+-]?[0-9]+(?:\.[0-9]+)?", re.ASCII)
 
 
@@ -473,3 +474,157 @@ def _bounded_json(value):
         size += len(chunk.encode("utf-8"))
         if size > MAX_SNAPSHOT_BYTES:
             _error("snapshot exceeds 16 MiB serialized JSON")
+
+
+def _selection_metadata(record):
+    """Validate the canonical contract object without fabricating market evidence."""
+    _bounded_json(record)
+    _object(record, "contract")
+    family = _text(record.get("family"), "contract.family")
+    if family not in ("index_future", "index_option"):
+        raise DerivativeInputError(UNSUPPORTED, "unsupported instrument family")
+    required = {
+        "contract_id", "venue", "root", "family", "underlying_id", "currency", "value_per_price_unit",
+        "tick_size", "last_trade_at", "expiry_at", "settlement", "spec_source", "spec_effective_at",
+        "standard_deliverable",
+    }
+    if family == "index_option":
+        required |= {"right", "strike", "exercise", "underlying_kind"}
+    _fields(record, required, set(), "contract")
+    for field in ("contract_id", "underlying_id", "venue", "root", "spec_source", "currency"):
+        _text(record[field], "contract." + field)
+    if _ROOT.fullmatch(f"{record['venue']}:{record['root']}") is None:
+        _error("contract venue/root must form an ASCII VENUE:ROOT")
+    if re.fullmatch(r"[A-Z]{3}", record["currency"], re.ASCII) is None:
+        _error("currency must be an uppercase three-letter code")
+    for field in ("value_per_price_unit", "tick_size"):
+        if decimal_value(record[field]) <= 0:
+            _error(f"{field} must be positive")
+    if record["settlement"] != "cash" or record["standard_deliverable"] is not True:
+        raise DerivativeInputError(UNSUPPORTED, "only standard cash-settled index contracts are supported")
+    if family == "index_option":
+        if record["exercise"] != "european" or record["underlying_kind"] != "cash_index":
+            raise DerivativeInputError(UNSUPPORTED, "only European options on a cash index are supported")
+        if record["right"] not in ("call", "put") or decimal_value(record["strike"]) <= 0:
+            _error("option right/positive strike required")
+    return tuple(aware_time(record[field]) for field in ("expiry_at", "last_trade_at", "spec_effective_at"))
+
+
+def select_contracts(records, request, *, kind, as_of, spot):
+    """Select contract metadata offline, never quotes or trading recommendations."""
+    from collections import Counter
+    from copy import deepcopy
+    from decimal import localcontext
+
+    if not isinstance(request, str) or _ROOT.fullmatch(request) is None:
+        _error("selection requires one exact ASCII VENUE:ROOT token")
+    normalized_request = parse_root_requests(request)["roots"][0]
+    if kind not in ("futures", "options"):
+        _error("kind must be futures or options")
+    cutoff = aware_time(as_of)
+    if type(records) is not list or len(records) > 1000:
+        _error("records must be a list of at most 1000 contract objects")
+    option = kind == "options"
+    min_days, max_days = (14, 60) if option else (7, 120)
+    policy = {
+        "expiry": "nearest_30_calendar_days_tie_earlier" if option else "earliest_eligible_expiry",
+        "calendar_basis": "UTC_calendar_dates", "min_days": min_days, "max_days": max_days,
+    }
+    if option:
+        selection_spot = decimal_value(spot)
+        if selection_spot <= 0:
+            _error("option selection requires positive spot")
+        with localcontext() as context:
+            context.prec = 256
+            low_strike = selection_spot * Decimal("0.95")
+            high_strike = selection_spot * Decimal("1.05")
+        policy.update(target_days=30, strike_band_fraction="0.05", max_strikes_per_right=4, max_selected=8)
+    reasons = Counter()
+    identifiers = []
+    for record in records:
+        identifier = record.get("contract_id") if type(record) is dict else None
+        try:
+            identifier = _text(identifier, "contract_id") if type(identifier) is str else None
+        except DerivativeInputError:
+            identifier = None
+        identifiers.append(identifier)
+    id_counts = Counter(identifier for identifier in identifiers if identifier is not None)
+    candidates = []
+    for record, identifier in zip(records, identifiers):
+        if identifier is not None and id_counts[identifier] > 1:
+            reasons["DUPLICATE_CONTRACT_ID"] += 1
+            continue
+        try:
+            expiry, last_trade, effective = _selection_metadata(record)
+        except DerivativeInputError as exc:
+            reasons["INVALID_CONTRACT_RECORD" if exc.code == INVALID else exc.code] += 1
+            continue
+        if f"{record['venue']}:{record['root']}".upper() != normalized_request:
+            reasons["ROOT_MISMATCH"] += 1
+            continue
+        expected_family = "index_option" if option else "index_future"
+        if record["family"] != expected_family:
+            reasons["KIND_MISMATCH"] += 1
+            continue
+        if last_trade > expiry:
+            reasons["INVALID_CONTRACT_CLOCK_ORDER"] += 1
+            continue
+        if cutoff >= last_trade:
+            reasons["EXPIRED_CONTRACT"] += 1
+            continue
+        if effective > cutoff:
+            reasons["FUTURE_SPEC_EFFECTIVE_AT"] += 1
+            continue
+        horizon = expiry if option else last_trade
+        if not min_days <= (horizon.date() - cutoff.date()).days <= max_days:
+            reasons["OUTSIDE_SELECTION_WINDOW"] += 1
+            continue
+        if option and not low_strike <= decimal_value(record["strike"]) <= high_strike:
+            reasons["STRIKE_OUTSIDE_SPOT_BAND"] += 1
+            continue
+        candidates.append((expiry, record["contract_id"], record))
+    ambiguous_fields = [
+        field for field in ("currency", "underlying_id")
+        if len({item[2][field] for item in candidates}) > 1
+    ]
+    if ambiguous_fields:
+        raise DerivativeInputError(
+            AMBIGUOUS,
+            "eligible contracts disagree on " + " and ".join(ambiguous_fields),
+        )
+    chosen = []
+    if candidates:
+        if option:
+            selected_expiry = min(
+                (item[0] for item in candidates),
+                key=lambda expiry: (abs((expiry.date() - cutoff.date()).days - 30), expiry),
+            )
+        else:
+            selected_expiry = min(item[0] for item in candidates)
+        at_expiry = [item for item in candidates if item[0] == selected_expiry]
+        reasons["EXPIRY_NOT_SELECTED"] += len(candidates) - len(at_expiry)
+        if option:
+            with localcontext() as context:
+                context.prec = 256
+                for right in ("call", "put"):
+                    group = [item for item in at_expiry if item[2]["right"] == right]
+                    group.sort(key=lambda item: (
+                        abs(decimal_value(item[2]["strike"]) - selection_spot),
+                        decimal_value(item[2]["strike"]), item[1],
+                    ))
+                    chosen.extend(group[:4])
+                    reasons["SELECTION_CAP"] += max(0, len(group) - 4)
+        else:
+            chosen = sorted(at_expiry, key=lambda item: item[1])[:1]
+            reasons["SELECTION_CAP"] += len(at_expiry) - len(chosen)
+    return {
+        "selected": [deepcopy(item[2]) for item in chosen],
+        "searched_count": len(records),
+        "selected_count": len(chosen),
+        "excluded_count": len(records) - len(chosen),
+        "exclusion_reasons": dict(sorted((key, count) for key, count in reasons.items() if count)),
+        "selection_only": True,
+        "research_only": True,
+        "policy_version": "derivatives_policy_v1",
+        "selection_policy": policy,
+    }

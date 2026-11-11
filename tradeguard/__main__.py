@@ -24,8 +24,17 @@ def _attach(snapshot: dict, data: dict, field: str) -> None:
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="TradeGuard read-only stocks/ETF research. No orders; scores are not win probabilities.")
+    parser = argparse.ArgumentParser(description="TradeGuard read-only equity and offline derivative research. No orders; scores are not win probabilities.")
     sub = parser.add_subparsers(dest="command", required=True)
+    derivatives = sub.add_parser("derivatives", help="Offline cash-index futures/European-options snapshots; live derivative feeds unavailable in M1")
+    derivatives.add_argument("roots", nargs="*", help="Reserved root grammar VENUE:ROOT; M1 reports live feeds unavailable")
+    derivatives.add_argument("--snapshot", help="Explicit normalized derivative JSON snapshot (offline)")
+    derivatives.add_argument("--short-leg", help="Optional exact matching short-leg JSON snapshot for a debit vertical")
+    derivatives.add_argument("--kind", choices=["futures", "options"], help="Root-request family only; snapshots carry their own exact family")
+    derivatives.add_argument("--as-of", help="Aware ISO cutoff; use fixed example cutoff for synthetic fixtures")
+    derivatives.add_argument("--json", action="store_true", help="Machine-readable JSON; prompt emits one object per submitted line")
+    derivatives.add_argument("--interactive", action="store_true", help="Root-format prompt; M1 still reports derivative feeds unavailable")
+    derivatives.add_argument("--allow-derivatives-data", action="store_true", help="Reserved opt-in flag; cannot enable a live provider in offline M1")
     catalog = sub.add_parser("strategies", help="Offline source-linked strategy research directory, not validated signals")
     catalog.add_argument("--asset-type", choices=["stock", "etf"])
     catalog.add_argument("--strategy-id")
@@ -54,7 +63,28 @@ def main(argv=None) -> int:
     book.add_argument("--input", required=True, help="JSON object with quote or events")
     args = parser.parse_args(argv)
     try:
-        if args.command == "recommend":
+        if args.command == "derivatives":
+            from .derivatives import analyze_derivative_request, derivative_roots_unavailable
+            from .derivative_ui import render_derivative_results, run_derivative_prompt
+            if args.snapshot:
+                if args.roots or args.interactive or args.kind:
+                    raise ValueError("--snapshot is exclusive with roots, --interactive and --kind")
+                snapshot = _read_json(args.snapshot)
+                short = _read_json(args.short_leg) if args.short_leg else None
+                if args.short_leg and not isinstance(short, dict):
+                    raise ValueError("explicit short-leg file must contain a normalized option object")
+                result = analyze_derivative_request(snapshot, short_leg=short, as_of=args.as_of)
+            else:
+                if args.short_leg:
+                    raise ValueError("--short-leg requires an explicit --snapshot long leg")
+                if args.interactive:
+                    if args.roots:
+                        raise ValueError("use initial roots or --interactive, not both")
+                    return run_derivative_prompt(kind=args.kind or "options", as_of=args.as_of, json_output=args.json)
+                result = derivative_roots_unavailable(" ".join(args.roots), kind=args.kind or "options", as_of=args.as_of)
+            print(json.dumps(result, allow_nan=False) if args.json else render_derivative_results(result))
+            return 0 if result["success"] else (1 if result.get("code") == "DERIVATIVES_PROVIDER_NOT_IMPLEMENTED" else 2)
+        elif args.command == "recommend":
             from .tickers import recommend_tickers
             from .ticker_ui import run_ticker_prompt, show_ticker_results
             if not args.allow_public_data:
@@ -105,8 +135,11 @@ def main(argv=None) -> int:
             result.update({"research_only": True, "not_an_entry_signal": True})
         print(json.dumps({"success": True, **result}, indent=2, allow_nan=False))
         return 0
-    except (ValueError, TypeError, KeyError, OSError, ArithmeticError) as exc:
-        print(json.dumps({"success": False, "error": str(exc), "research_only": True}))
+    except (ValueError, TypeError, KeyError, OSError, ArithmeticError, RecursionError) as exc:
+        error = {"success": False, "error": str(exc), "research_only": True}
+        if args.command == "derivatives":
+            error["code"] = getattr(exc, "code", "INVALID_DERIVATIVE_ARGUMENTS")
+        print(json.dumps(error))
         return 2
 
 
