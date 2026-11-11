@@ -4,7 +4,7 @@ A **read-only research plugin for Hermes Agent**. It separates stock/ETF fundame
 
 > This is a research prototype, not a proven alpha service or a universal trading firewall. The broader multi-venue roadmap remains in `PLAN.md`. Offline derivative mathematics is implemented; live derivative/prediction-market adapters, account access and a blocking hook are not.
 
-**Distribution boundary:** the 0.2.0 derivatives work is local to `feat/derivatives-research` until the owner separately authorizes publication. The GitHub/default-branch install below still installs the last published version; it does not automatically include unpushed local changes.
+**Distribution boundary:** version 0.2.0 derivatives work is on `feat/derivatives-research`, not merged into `main`. The default-branch install below does not automatically include feature-branch changes. To install the feature, use `hermes plugins install vansh-attention/hermes-tradeguard --ref feat/derivatives-research --enable`, or substitute its full tested commit SHA for an immutable pin. Publishing a Git branch is not catalog admission or live-feed enablement.
 
 ## Install in Hermes
 
